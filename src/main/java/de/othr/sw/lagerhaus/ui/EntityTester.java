@@ -32,7 +32,7 @@ public class EntityTester extends HttpServlet{
             
             Person antragsformular = new Person();
             antragsformular.setNachname("Muster");
-            antragsformular.setVorname("Max");
+            antragsformular.setVorname("Max2");
             Person neu = service.PersonAnlegen(antragsformular);
             
             out.println("Person wurde angelegt:  " + neu.toString());
