@@ -1,6 +1,6 @@
 package de.othr.sw.lagerhaus.service;
 
-import de.othr.sw.lagerhaus.entity.Kunde;
+import de.othr.sw.lagerhaus.entity.Mitarbeiter;
 import java.util.Random;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -8,13 +8,13 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @RequestScoped
-public class KundenService {
+public class MitarbeiterService {
     
     @PersistenceContext
     private EntityManager em;
     
     @Transactional
-    public Kunde PersonAnlegen(Kunde k)
+    public Mitarbeiter MitarbeiterAnlegen(Mitarbeiter k)
     {
         k.setPersonenNummer(new Random().nextInt(9999999));
         
@@ -23,9 +23,9 @@ public class KundenService {
         return k;
     }
     
-    public Kunde lesePerson (int personenNummer)
+    public Mitarbeiter lesePerson (int personenNummer)
     {
-        Kunde gefunden = em.find(Kunde.class, personenNummer);
+        Mitarbeiter gefunden = em.find(Mitarbeiter.class, personenNummer);
         return gefunden;
     }
     

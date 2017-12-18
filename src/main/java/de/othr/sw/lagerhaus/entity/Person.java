@@ -8,7 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Person implements Serializable {
     
-    @Id private int _personenNummer;
+    @Id 
+    private int _personenNummer;
     private String _nachname;
     private String _vorname;
     //private Date _geburtsdatum;

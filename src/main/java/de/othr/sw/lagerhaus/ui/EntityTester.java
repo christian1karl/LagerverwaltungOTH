@@ -1,8 +1,8 @@
 package de.othr.sw.lagerhaus.ui;
 
 import de.othr.sw.lagerhaus.entity.Adresse;
-import de.othr.sw.lagerhaus.entity.Person;
-import de.othr.sw.lagerhaus.service.KundenService;
+import de.othr.sw.lagerhaus.entity.Mitarbeiter;
+import de.othr.sw.lagerhaus.service.MitarbeiterService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EntityTester extends HttpServlet{
     
     @Inject
-    private KundenService service;
+    private MitarbeiterService service;
     
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,14 +31,22 @@ public class EntityTester extends HttpServlet{
             out.println("<body>");
             out.println("<h1>Servlet EntityTester at " + request.getContextPath() + "</h1>");
             
-            Person antragsformular = new Person();
-            antragsformular.setNachname("Muster2");
-            antragsformular.setVorname("Max");
+            
+            Mitarbeiter antragsformular = new Mitarbeiter();
+            antragsformular.setNachname("Karl");
+            antragsformular.setVorname("Christian");
             Adresse adresse = new Adresse();
-            adresse.setOrt("TestOrt");
+            adresse.setOrt("Kelheim");
+            adresse.setHausnummer(8);
+            adresse.setLand("Deutschland");
+            adresse.setPostleitzahl(93309);
+            adresse.setStrasse("Erhardiweg");
+            antragsformular.setGehalt(5000);
+            antragsformular.setTaetigkeit("Chef");
+            
             antragsformular.setAdresse(adresse);
 
-            Person neu = service.PersonAnlegen(antragsformular);
+            Mitarbeiter neu = service.MitarbeiterAnlegen(antragsformular);
             
             out.println("Person wurde angelegt:  " + neu.toString());
             
