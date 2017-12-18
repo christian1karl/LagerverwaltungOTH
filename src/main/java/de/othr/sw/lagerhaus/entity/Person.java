@@ -12,7 +12,7 @@ public class Person implements Serializable {
     private String _nachname;
     private String _vorname;
     //private Date _geburtsdatum;
-   // private Adresse _adresse;
+    private Adresse _adresse;
     private String _emailadresse;
     //private Date _erstelldatum;
     private String _benutzername;
@@ -26,7 +26,7 @@ public class Person implements Serializable {
         this._nachname = _nachname;
         this._vorname = _vorname;
        // this._geburtsdatum = _geburtsdatum;
-      //  this._adresse = _adresse;
+        this._adresse = _adresse;
         this._emailadresse = _emailadresse;
        // this._erstelldatum = _erstelldatum;
         this._benutzername = _benutzername;
@@ -67,13 +67,13 @@ public class Person implements Serializable {
 //        this._geburtsdatum = Geburtsdatum;
 //    }
 
-//    public Adresse getAdresse() {
-//        return _adresse;
-//    }
-//
-//    public void setAdresse(Adresse Adresse) {
-//        this._adresse = Adresse;
-//    }
+    public Adresse getAdresse() {
+        return _adresse;
+    }
+
+    public void setAdresse(Adresse Adresse) {
+        this._adresse = Adresse;
+    }
 
     public String getEmailadresse() {
         return _emailadresse;

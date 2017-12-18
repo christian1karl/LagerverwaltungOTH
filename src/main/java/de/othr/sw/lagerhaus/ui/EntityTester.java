@@ -1,5 +1,6 @@
 package de.othr.sw.lagerhaus.ui;
 
+import de.othr.sw.lagerhaus.entity.Adresse;
 import de.othr.sw.lagerhaus.entity.Person;
 import de.othr.sw.lagerhaus.service.KundenService;
 import java.io.IOException;
@@ -33,6 +34,10 @@ public class EntityTester extends HttpServlet{
             Person antragsformular = new Person();
             antragsformular.setNachname("Muster");
             antragsformular.setVorname("Max");
+            Adresse adresse = new Adresse();
+            adresse.setOrt("TestOrt");
+            antragsformular.setAdresse(adresse);
+
             Person neu = service.PersonAnlegen(antragsformular);
             
             out.println("Person wurde angelegt:  " + neu.toString());
