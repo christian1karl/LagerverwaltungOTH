@@ -43,12 +43,12 @@ public class Adresse implements Serializable {
         this._hausnummer = _hausnummer;
     }
 
-    public String getStraße() {
+    public String getStrasse() {
         return _strasse;
     }
 
-    public void setStraße(String _straße) {
-        this._strasse = _straße;
+    public void setStrasse(String _strasse) {
+        this._strasse = _strasse;
     }
 
     public int getPostleitzahl() {
