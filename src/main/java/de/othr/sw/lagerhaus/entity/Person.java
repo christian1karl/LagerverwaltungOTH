@@ -2,10 +2,10 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 public class Person implements Serializable {
     
     @Id 
