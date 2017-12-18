@@ -32,7 +32,7 @@ public class EntityTester extends HttpServlet{
             out.println("<h1>Servlet EntityTester at " + request.getContextPath() + "</h1>");
             
             Person antragsformular = new Person();
-            antragsformular.setNachname("Muster");
+            antragsformular.setNachname("Muster2");
             antragsformular.setVorname("Max");
             Adresse adresse = new Adresse();
             adresse.setOrt("TestOrt");
