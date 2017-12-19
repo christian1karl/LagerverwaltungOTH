@@ -1,10 +1,13 @@
 package de.othr.sw.lagerhaus.ui;
 
-import de.othr.sw.lagerhaus.entity.Adresse;
-import de.othr.sw.lagerhaus.entity.Mitarbeiter;
-import de.othr.sw.lagerhaus.service.MitarbeiterService;
+import de.othr.sw.lagerhaus.entity.Lagerplatz;
+import de.othr.sw.lagerhaus.entity.Lagerstatus;
+import de.othr.sw.lagerhaus.entity.Lagerware;
+import de.othr.sw.lagerhaus.service.LagerplatzService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "EntityTester", urlPatterns = {"/EntityTester"})
-public class EntityTester extends HttpServlet{
+@WebServlet(name = "Lagerplatz", urlPatterns = {"/Lagerplatz"})
+public class AddLagerplatzTest extends HttpServlet{
     
     @Inject
-    private MitarbeiterService service;
+    private LagerplatzService service;
     
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,29 +29,24 @@ public class EntityTester extends HttpServlet{
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EntityTester</title>");            
+            out.println("<title>Servlet Lagerplatz</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EntityTester at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Lagerplatz at " + request.getContextPath() + "</h1>");
             
             
-            Mitarbeiter antragsformular = new Mitarbeiter();
-            antragsformular.setNachname("Karl2");
-            antragsformular.setVorname("Christian");
-            Adresse adresse = new Adresse();
-            adresse.setOrt("Kelheim");
-            adresse.setHausnummer(8);
-            adresse.setLand("Deutschland");
-            adresse.setPostleitzahl(93309);
-            adresse.setStrasse("Erhardiweg");
-            antragsformular.setGehalt(5000);
-            antragsformular.setTaetigkeit("Chef");
+            Lagerplatz antragsformular = new Lagerplatz();
+            antragsformular.setLagerpreis(100);
+            antragsformular.setLagerstatus(Lagerstatus.Frei);
+            Lagerware ware = new Lagerware();
+            ware.setLagerplatz(antragsformular);
+            ware.setWarenbezeichnung("Holzkohle");
+            List<Lagerware> waren = new ArrayList();
+            waren.add(ware);
+            antragsformular.setLagerwaren(waren);
+            Lagerplatz neu = service.LagerplatzAnlegen(antragsformular);
             
-            antragsformular.setAdresse(adresse);
-
-            Mitarbeiter neu = service.MitarbeiterAnlegen(antragsformular);
-            
-            out.println("Person wurde angelegt:  " + neu.toString());
+            out.println("Lagerplatz wurde angelegt:  " + neu.toString());
             
             out.println("</body>");
             out.println("</html>");

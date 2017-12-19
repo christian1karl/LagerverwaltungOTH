@@ -14,9 +14,7 @@ public class Adresse implements Serializable {
     private String _ort;
     private String _land;
 
-    public Adresse (){
-        
-    }
+    public Adresse (){}
 
     public Adresse(String _hausnummerzusatz, int _hausnummer, String _strasse, int _postleitzahl, String _ort, String _land) {
         this._hausnummerzusatz = _hausnummerzusatz;
