@@ -2,123 +2,128 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
-@MappedSuperclass
-public class Person implements Serializable {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Person implements Serializable {
     
     @Id 
-    private int _personenNummer;
-    private String _nachname;
-    private String _vorname;
-    //private Date _geburtsdatum;
-    private Adresse _adresse;
-    private String _emailadresse;
-    //private Date _erstelldatum;
-    private String _benutzername;
-    private String _passwort;
+    private int PersonenNummer;
+    private String Nachname;
+    private String Vorname;
+    //private Date Geburtsdatum;
+    @OneToOne
+    private Adresse Adresse;
+    private String Emailadresse;
+    //private Date Erstelldatum;
+    private String Benutzername;
+    private String Passwort;
 
     public Person(){
         
     }
 
-    public Person(String _nachname, String _vorname, Date _geburtsdatum, Adresse _adresse, String _emailadresse, Date _erstelldatum, String _benutzername, String _passwort) {
-        this._nachname = _nachname;
-        this._vorname = _vorname;
-       // this._geburtsdatum = _geburtsdatum;
-        this._adresse = _adresse;
-        this._emailadresse = _emailadresse;
-       // this._erstelldatum = _erstelldatum;
-        this._benutzername = _benutzername;
-        this._passwort = _passwort;
+    public Person(String Nachname, String Vorname, Date Geburtsdatum, Adresse Adresse, String Emailadresse, Date Erstelldatum, String Benutzername, String Passwort) {
+        this.Nachname = Nachname;
+        this.Vorname = Vorname;
+       // this.Geburtsdatum = Geburtsdatum;
+        this.Adresse = Adresse;
+        this.Emailadresse = Emailadresse;
+       // this.Erstelldatum = Erstelldatum;
+        this.Benutzername = Benutzername;
+        this.Passwort = Passwort;
     }
     
 
     
     public int getPersonenNummer() {
-        return _personenNummer;
+        return PersonenNummer;
     }
 
     public void setPersonenNummer(int PersonenNummer) {
-        this._personenNummer = PersonenNummer;
+        this.PersonenNummer = PersonenNummer;
     }
 
     public String getNachname() {
-        return _nachname;
+        return Nachname;
     }
 
     public void setNachname(String Nachname) {
-        this._nachname = Nachname;
+        this.Nachname = Nachname;
     }
 
     public String getVorname() {
-        return _vorname;
+        return Vorname;
     }
 
     public void setVorname(String Vorname) {
-        this._vorname = Vorname;
+        this.Vorname = Vorname;
     }
 
 //    public Date getGeburtsdatum() {
-//        return _geburtsdatum;
+//        return Geburtsdatum;
 //    }
 //
 //    public void setGeburtsdatum(Date Geburtsdatum) {
-//        this._geburtsdatum = Geburtsdatum;
+//        this.Geburtsdatum = Geburtsdatum;
 //    }
 
     public Adresse getAdresse() {
-        return _adresse;
+        return Adresse;
     }
 
     public void setAdresse(Adresse Adresse) {
-        this._adresse = Adresse;
+        this.Adresse = Adresse;
     }
 
     public String getEmailadresse() {
-        return _emailadresse;
+        return Emailadresse;
     }
 
     public void setEmailadresse(String Emailadresse) {
-        this._emailadresse = Emailadresse;
+        this.Emailadresse = Emailadresse;
     }
 
 //    public Date getErstelldatum() {
-//        return _erstelldatum;
+//        return Erstelldatum;
 //    }
 
     /* Frage: Sollte es so eine Funktion geben?
     public void setErstelldatum(Date Erstelldatum) {
-        this._erstelldatum = Erstelldatum;
+        this.Erstelldatum = Erstelldatum;
     }
     */
     
     public String getBenutzername() {
-        return _benutzername;
+        return Benutzername;
     }
 
     public void setBenutzername(String Benutzername) {
-        this._benutzername = Benutzername;
+        this.Benutzername = Benutzername;
     }
 
     public String getPasswort() {
-        return _passwort;
+        return Passwort;
     }
 
     public void setPasswort(String Passwort) {
-        this._passwort = Passwort;
+        this.Passwort = Passwort;
     }
 
     @Override
     public String toString() {
-        return "Person{" + "Nachname=" + _nachname + ", Vorname=" + _vorname + ", Benutzername=" + _benutzername + '}';
+        return "Person{" + "Nachname=" + Nachname + ", Vorname=" + Vorname + ", Benutzername=" + Benutzername + '}';
     }
     
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + (int) (this._personenNummer ^ (this._personenNummer >>> 32));
+        hash = 97 * hash + (int) (this.PersonenNummer ^ (this.PersonenNummer >>> 32));
         return hash;
     }
 
@@ -134,7 +139,7 @@ public class Person implements Serializable {
             return false;
         }
         final Person other = (Person) obj;
-        if (this._personenNummer != other._personenNummer) {
+        if (this.PersonenNummer != other.PersonenNummer) {
             return false;
         }
         return true;

@@ -1,4 +1,4 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhaus.enums;
 
 
 public enum Auftragstyp {

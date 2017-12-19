@@ -7,86 +7,86 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Adresse implements Serializable {
     
-    private String _hausnummerzusatz;
-    private int _hausnummer;
-    private String _strasse;
-    private int _postleitzahl;
-    private String _ort;
-    private String _land;
+    private String Hausnummerzusatz;
+    private int Hausnummer;
+    private String Strasse;
+    private int Postleitzahl;
+    private String Ort;
+    private String Land;
 
     public Adresse (){}
 
-    public Adresse(String _hausnummerzusatz, int _hausnummer, String _strasse, int _postleitzahl, String _ort, String _land) {
-        this._hausnummerzusatz = _hausnummerzusatz;
-        this._hausnummer = _hausnummer;
-        this._strasse = _strasse;
-        this._postleitzahl = _postleitzahl;
-        this._ort = _ort;
-        this._land = _land;
+    public Adresse(String Hausnummerzusatz, int Hausnummer, String Strasse, int Postleitzahl, String _ort, String Land) {
+        this.Hausnummerzusatz = Hausnummerzusatz;
+        this.Hausnummer = Hausnummer;
+        this.Strasse = Strasse;
+        this.Postleitzahl = Postleitzahl;
+        this.Ort = Ort;
+        this.Land = Land;
     }
     
     public String getHausnummerzusatz() {
-        return _hausnummerzusatz;
+        return Hausnummerzusatz;
     }
 
-    public void setHausnummerzusatz(String _hausnummerzusatz) {
-        this._hausnummerzusatz = _hausnummerzusatz;
+    public void setHausnummerzusatz(String Hausnummerzusatz) {
+        this.Hausnummerzusatz = Hausnummerzusatz;
     }
 
     public int getHausnummer() {
-        return _hausnummer;
+        return Hausnummer;
     }
 
-    public void setHausnummer(int _hausnummer) {
-        this._hausnummer = _hausnummer;
+    public void setHausnummer(int Hausnummer) {
+        this.Hausnummer = Hausnummer;
     }
 
     public String getStrasse() {
-        return _strasse;
+        return Strasse;
     }
 
-    public void setStrasse(String _strasse) {
-        this._strasse = _strasse;
+    public void setStrasse(String Strasse) {
+        this.Strasse = Strasse;
     }
 
     public int getPostleitzahl() {
-        return _postleitzahl;
+        return Postleitzahl;
     }
 
-    public void setPostleitzahl(int _postleitzahl) {
-        this._postleitzahl = _postleitzahl;
+    public void setPostleitzahl(int Postleitzahl) {
+        this.Postleitzahl = Postleitzahl;
     }
 
     public String getOrt() {
-        return _ort;
+        return Ort;
     }
 
-    public void setOrt(String _ort) {
-        this._ort = _ort;
+    public void setOrt(String Ort) {
+        this.Ort = Ort;
     }
 
     public String getLand() {
-        return _land;
+        return Land;
     }
 
-    public void setLand(String _land) {
-        this._land = _land;
+    public void setLand(String Land) {
+        this.Land = Land;
     }
 
     @Override
     public String toString() {
-        return "Adresse{" + "Hausnummerzusatz=" + _hausnummerzusatz + ", Hausnummer=" + _hausnummer + ", Strasse=" + _strasse + ", Postleitzahl=" + _postleitzahl + ", Ort=" + _ort + ", Land=" + _land + '}';
+        return "Adresse{" + "Hausnummerzusatz=" + Hausnummerzusatz + ", Hausnummer=" + Hausnummer + ", Strasse=" + Strasse + ", Postleitzahl=" + Postleitzahl + ", Ort=" + Ort + ", Land=" + Land + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this._hausnummerzusatz);
-        hash = 83 * hash + this._hausnummer;
-        hash = 83 * hash + Objects.hashCode(this._strasse);
-        hash = 83 * hash + this._postleitzahl;
-        hash = 83 * hash + Objects.hashCode(this._ort);
-        hash = 83 * hash + Objects.hashCode(this._land);
+        hash = 83 * hash + Objects.hashCode(this.Hausnummerzusatz);
+        hash = 83 * hash + this.Hausnummer;
+        hash = 83 * hash + Objects.hashCode(this.Strasse);
+        hash = 83 * hash + this.Postleitzahl;
+        hash = 83 * hash + Objects.hashCode(this.Ort);
+        hash = 83 * hash + Objects.hashCode(this.Land);
         return hash;
     }
 
@@ -102,22 +102,22 @@ public class Adresse implements Serializable {
             return false;
         }
         final Adresse other = (Adresse) obj;
-        if (this._hausnummer != other._hausnummer) {
+        if (this.Hausnummer != other.Hausnummer) {
             return false;
         }
-        if (this._postleitzahl != other._postleitzahl) {
+        if (this.Postleitzahl != other.Postleitzahl) {
             return false;
         }
-        if (!Objects.equals(this._hausnummerzusatz, other._hausnummerzusatz)) {
+        if (!Objects.equals(this.Hausnummerzusatz, other.Hausnummerzusatz)) {
             return false;
         }
-        if (!Objects.equals(this._strasse, other._strasse)) {
+        if (!Objects.equals(this.Strasse, other.Strasse)) {
             return false;
         }
-        if (!Objects.equals(this._ort, other._ort)) {
+        if (!Objects.equals(this.Ort, other.Ort)) {
             return false;
         }
-        if (!Objects.equals(this._land, other._land)) {
+        if (!Objects.equals(this.Land, other.Land)) {
             return false;
         }
         return true;

@@ -1,7 +1,7 @@
 package de.othr.sw.lagerhaus.entity;
 
+import de.othr.sw.lagerhaus.enums.Auftragstyp;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,10 +10,10 @@ import javax.persistence.Id;
 public class Lagerauftrag implements Serializable{
     
     @Id
-    private int _lagerauftragsnummer;
-    //private Collection<Lagerware> _waren;
-    private Date _auftragsdatum;
-    private Auftragstyp _auftragstyp;
-    private Kunde _auftraggeber;
+    private int Lagerauftragsnummer;
+    //private Collection<Lagerware> Waren;
+    private Date Auftragsdatum;
+    private Auftragstyp Auftragstyp;
+    private Kunde Auftraggeber;
     
 }

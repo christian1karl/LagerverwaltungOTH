@@ -1,7 +1,7 @@
 package de.othr.sw.lagerhaus.ui;
 
 import de.othr.sw.lagerhaus.entity.Lagerplatz;
-import de.othr.sw.lagerhaus.entity.Lagerstatus;
+import de.othr.sw.lagerhaus.enums.Lagerstatus;
 import de.othr.sw.lagerhaus.entity.Lagerware;
 import de.othr.sw.lagerhaus.service.LagerplatzService;
 import java.io.IOException;

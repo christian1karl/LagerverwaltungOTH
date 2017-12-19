@@ -2,17 +2,13 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Mitarbeiter extends Person implements Serializable{
     
-    private int _mitarbeiternummer;
-    private String _taetigkeit;
-    private double _gehalt;
+    private int Mitarbeiternummer;
+    private String Taetigkeit;
+    private double Gehalt;
     
     public Mitarbeiter()
     {
@@ -20,27 +16,27 @@ public class Mitarbeiter extends Person implements Serializable{
     }
     
     public int getMitarbeiternummer() {
-        return _mitarbeiternummer;
+        return Mitarbeiternummer;
     }
 
     public void setMitarbeiternummer(int Mitarbeiternummer) {
-        this._mitarbeiternummer = Mitarbeiternummer;
+        this.Mitarbeiternummer = Mitarbeiternummer;
     }
 
     public String getTaetigkeit() {
-        return _taetigkeit;
+        return Taetigkeit;
     }
 
     public void setTaetigkeit(String Taetigkeit) {
-        this._taetigkeit = Taetigkeit;
+        this.Taetigkeit = Taetigkeit;
     }
 
     public double getGehalt() {
-        return _gehalt;
+        return Gehalt;
     }
 
     public void setGehalt(double Gehalt) {
-        this._gehalt = Gehalt;
+        this.Gehalt = Gehalt;
     }
     
     
