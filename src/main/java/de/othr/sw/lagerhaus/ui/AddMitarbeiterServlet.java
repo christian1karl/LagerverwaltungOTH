@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "EntityTester", urlPatterns = {"/EntityTester"})
-public class AddMitarbeiterTest extends HttpServlet{
+public class AddMitarbeiterServlet extends HttpServlet{
     
     @Inject
     private MitarbeiterService service;

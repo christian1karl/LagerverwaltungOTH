@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "Lagerplatz", urlPatterns = {"/Lagerplatz"})
-public class AddLagerplatzTest extends HttpServlet{
+public class AddLagerplatzServlet extends HttpServlet{
     
     @Inject
     private LagerplatzService service;
