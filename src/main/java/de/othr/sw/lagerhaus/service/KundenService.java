@@ -1,10 +1,12 @@
 package de.othr.sw.lagerhaus.service;
 
 import de.othr.sw.lagerhaus.entity.Kunde;
+import java.util.List;
 import java.util.Random;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 @RequestScoped
@@ -27,6 +29,12 @@ public class KundenService {
     {
         Kunde gefunden = em.find(Kunde.class, personenNummer);
         return gefunden;
+    }
+
+      public List<Kunde> leseAllePersonen ()
+    {
+        Query query = em.createQuery("SELECT t FROM Person ");
+        return (List<Kunde>) query.getResultList();
     }
     
 }
