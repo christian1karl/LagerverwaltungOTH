@@ -26,6 +26,7 @@ public class RegistrierungModel implements Serializable{
     private String benutzername;
     private String emailadresse;
     private String passwort;
+    private String passwort2;
     
 
     public void pruefeRegistrierung()
@@ -48,9 +49,16 @@ public class RegistrierungModel implements Serializable{
         
         neuerKunde.setAdresse(neueAdresse);
         
-        kundenService.PersonAnlegen(neuerKunde);
+        
+        kundenService.KundeAnlegen(neuerKunde);
 
 
+    }
+    
+    
+    public boolean pruefePasswort()
+    {
+        return true;
     }
 
     public String getVorname() {
@@ -139,6 +147,14 @@ public class RegistrierungModel implements Serializable{
 
     public void setPasswort(String passwort) {
         this.passwort = passwort;
+    }
+    
+      public String getPasswort2() {
+        return passwort2;
+    }
+
+    public void setPasswort2(String passwort) {
+        this.passwort2 = passwort;
     }
     
     

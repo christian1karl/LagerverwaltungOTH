@@ -16,7 +16,7 @@ public class MitarbeiterService {
     @Transactional
     public Mitarbeiter MitarbeiterAnlegen(Mitarbeiter k)
     {
-        k.setPersonenNummer(new Random().nextInt(9999999));
+        k.setMitarbeiternummer(new Random().nextInt(9999999));
         
         em.persist(k);
         

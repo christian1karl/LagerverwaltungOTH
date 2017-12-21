@@ -2,11 +2,14 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mitarbeiter extends Person implements Serializable{
     
+    @Id
     private int Mitarbeiternummer;
+    
     private String Taetigkeit;
     private double Gehalt;
     

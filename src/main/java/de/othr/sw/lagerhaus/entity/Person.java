@@ -2,21 +2,18 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Person implements Serializable {
     
-    @Id 
-    private int PersonenNummer;
     private String Nachname;
     private String Vorname;
     //private Date Geburtsdatum;
-    //@OneToOne
     private Adresse Adresse;
     private String Emailadresse;
     //private Date Erstelldatum;
@@ -38,15 +35,6 @@ public abstract class Person implements Serializable {
         this.Passwort = Passwort;
     }
     
-
-    
-    public int getPersonenNummer() {
-        return PersonenNummer;
-    }
-
-    public void setPersonenNummer(int PersonenNummer) {
-        this.PersonenNummer = PersonenNummer;
-    }
 
     public String getNachname() {
         return Nachname;
@@ -118,32 +106,7 @@ public abstract class Person implements Serializable {
     public String toString() {
         return "Person{" + "Nachname=" + Nachname + ", Vorname=" + Vorname + ", Benutzername=" + Benutzername + '}';
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (int) (this.PersonenNummer ^ (this.PersonenNummer >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Person other = (Person) obj;
-        if (this.PersonenNummer != other.PersonenNummer) {
-            return false;
-        }
-        return true;
-    }
-    
+  
     
     
 }

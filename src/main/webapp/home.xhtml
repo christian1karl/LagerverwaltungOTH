@@ -9,6 +9,20 @@
     <h:body>
         <h:form>
         <h:panelGrid columns="2">
+                        
+            <h:outputText value="Benutzername:"/>
+            <h:inputText value="#{registrierungModel.benutzername}"/>
+            
+            <h:outputText id="passwordField1" value="Passwort:"/>
+            <h:inputSecret value="#{registrierungModel.passwort}" required="true" validatorMessage="Passwort1 muss zwischen 8 und 15 Zeichen haben">
+                <f:validateLength minimum="8" maximum="15"/>
+            </h:inputSecret>
+            
+            <h:outputText value="Passwort wiederholen:"/>
+            <h:inputSecret value="#{registrierungModel.passwort2}" required="true" validatorMessage="Passwort2 muss zwischen 8 und 15 Zeichen haben">
+                <f:validateLength minimum="8" maximum="15"/>
+            </h:inputSecret>
+            
             <h:outputText value="Vorname:"/>
             <h:inputText value="#{registrierungModel.vorname}"/>
             
@@ -32,17 +46,13 @@
             
             <h:outputText value="Land:"/>
             <h:inputText value="#{registrierungModel.land}"/>
-            
-            <h:outputText value="Benutzername:"/>
-            <h:inputText value="#{registrierungModel.benutzername}"/>
-            
-            <h:outputText value="Passwort:"/>
-            <h:inputText value="#{registrierungModel.passwort}"/>
-            
+
             <h:outputText value="Email-Adresse:"/>
             <h:inputText value="#{registrierungModel.emailadresse}"/>
          
             <h:commandButton value="Konto erstellen" action="#{registrierungModel.pruefeRegistrierung()}"/>
+            
+            <h:message for="passwordField1"/>
         </h:panelGrid>
         </h:form>
     </h:body>
