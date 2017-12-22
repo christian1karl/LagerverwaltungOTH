@@ -2,128 +2,144 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-
+import javax.validation.constraints.Size;
 
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable
+{
     
-    private String Nachname;
-    private String Vorname;
+    @Size(min = 1)
+    private String vorname;
     
+    @Size(min = 1)
+    private String nachname;
+
     @NotNull
     @Past
     @Temporal(TemporalType.DATE)
-    private Date Geburtsdatum;
-    
+    private Date geburtsDatum;
+
     @Valid
-    private Adresse Adresse = new Adresse();
-    
+    private Adresse adresse = new Adresse();
+
     @Pattern(regexp = "[^@]+@[^@]+\\.[^@]+")
-    private String Emailadresse;
+    private String email;
+
+    @Size(min = 1)
+    private String benutzername;
     
-    //private Date Erstelldatum;
-    private String Benutzername;
-    private String Passwort;
+    @Size(min = 1)
+    private String passwort;
 
-    public Person(){
-    }
 
-    public Person(String Nachname, String Vorname, Date Geburtsdatum, Adresse Adresse, String Emailadresse, Date Erstelldatum, String Benutzername, String Passwort) {
-        this.Nachname = Nachname;
-        this.Vorname = Vorname;
-        this.Geburtsdatum = Geburtsdatum;
-        this.Adresse = Adresse;
-        this.Emailadresse = Emailadresse;
-       // this.Erstelldatum = Erstelldatum;
-        this.Benutzername = Benutzername;
-        this.Passwort = Passwort;
-    }
     
-
-    public String getNachname() {
-        return Nachname;
+    public Date getGeburtsDatum()
+    {
+      return this.geburtsDatum;
     }
 
-    public void setNachname(String Nachname) {
-        this.Nachname = Nachname;
+    public void setGeburtsDatum(Date gebDate)
+    {
+      this.geburtsDatum = gebDate;
+    }
+
+    public Adresse getAdresse()
+    {
+      return this.adresse;
+    }
+
+    public String getEmail()
+    {
+      return this.email;
+    }
+
+    public void setEmail(String email)
+    {
+      this.email = email;
     }
 
     public String getVorname() {
-        return Vorname;
+        return vorname;
     }
 
-    public void setVorname(String Vorname) {
-        this.Vorname = Vorname;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
-    public Date getGeburtsdatum() {
-        return Geburtsdatum;
+    public String getNachname() {
+        return nachname;
     }
 
-    public void setGeburtsdatum(Date Geburtsdatum) {
-        this.Geburtsdatum = Geburtsdatum;
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
-    public Adresse getAdresse() {
-        return Adresse;
-    }
-
-    public void setAdresse(Adresse Adresse) {
-        this.Adresse = Adresse;
-    }
-
-    public String getEmailadresse() {
-        return Emailadresse;
-    }
-
-    public void setEmailadresse(String Emailadresse) {
-        this.Emailadresse = Emailadresse;
-    }
-
-//    public Date getErstelldatum() {
-//        return Erstelldatum;
-//    }
-
-    /* Frage: Sollte es so eine Funktion geben?
-    public void setErstelldatum(Date Erstelldatum) {
-        this.Erstelldatum = Erstelldatum;
-    }
-    */
-    
     public String getBenutzername() {
-        return Benutzername;
+        return benutzername;
     }
 
-    public void setBenutzername(String Benutzername) {
-        this.Benutzername = Benutzername;
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
     }
 
     public String getPasswort() {
-        return Passwort;
+        return passwort;
     }
 
-    public void setPasswort(String Passwort) {
-        this.Passwort = Passwort;
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
     }
 
     @Override
     public String toString() {
-        return "Person{" + "Nachname=" + Nachname + ", Vorname=" + Vorname + ", Benutzername=" + Benutzername + '}';
+        return "Person{" + "vorname=" + vorname + ", nachname=" + nachname + ", benutzername=" + benutzername + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.vorname);
+        hash = 97 * hash + Objects.hashCode(this.nachname);
+        hash = 97 * hash + Objects.hashCode(this.benutzername);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        if (!Objects.equals(this.vorname, other.vorname)) {
+            return false;
+        }
+        if (!Objects.equals(this.nachname, other.nachname)) {
+            return false;
+        }
+        if (!Objects.equals(this.benutzername, other.benutzername)) {
+            return false;
+        }
+        return true;
+    }
+
   
-    
-    
 }

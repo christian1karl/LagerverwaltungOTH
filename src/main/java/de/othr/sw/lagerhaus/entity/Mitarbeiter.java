@@ -11,12 +11,8 @@ public class Mitarbeiter extends Person implements Serializable{
     private int Mitarbeiternummer;
     
     private String Taetigkeit;
-    private double Gehalt;
     
-    public Mitarbeiter()
-    {
-        
-    }
+    private double Gehalt;
     
     public int getMitarbeiternummer() {
         return Mitarbeiternummer;
