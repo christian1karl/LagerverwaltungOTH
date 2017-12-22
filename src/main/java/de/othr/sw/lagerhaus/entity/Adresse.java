@@ -1,22 +1,34 @@
 package de.othr.sw.lagerhaus.entity;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Embeddable;
+import de.othr.sw.lagerhaus.validation.ValidPlz;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Embeddable
 public class Adresse implements Serializable {
     
     private String Hausnummerzusatz;
+    
+    @Min(1)
     private int Hausnummer;
+    
+    @Size(min = 1)
     private String Strasse;
-    private int Postleitzahl;
+    
+    @ValidPlz
+    private String Postleitzahl;
+    
     private String Ort;
+    
     private String Land;
 
     public Adresse (){}
 
-    public Adresse(String Hausnummerzusatz, int Hausnummer, String Strasse, int Postleitzahl, String _ort, String Land) {
+    public Adresse(String Hausnummerzusatz, int Hausnummer, String Strasse, String Postleitzahl, String Ort, String Land) {
         this.Hausnummerzusatz = Hausnummerzusatz;
         this.Hausnummer = Hausnummer;
         this.Strasse = Strasse;
@@ -49,11 +61,11 @@ public class Adresse implements Serializable {
         this.Strasse = Strasse;
     }
 
-    public int getPostleitzahl() {
+    public String getPostleitzahl() {
         return Postleitzahl;
     }
 
-    public void setPostleitzahl(int Postleitzahl) {
+    public void setPostleitzahl(String Postleitzahl) {
         this.Postleitzahl = Postleitzahl;
     }
 
@@ -84,7 +96,7 @@ public class Adresse implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.Hausnummerzusatz);
         hash = 83 * hash + this.Hausnummer;
         hash = 83 * hash + Objects.hashCode(this.Strasse);
-        hash = 83 * hash + this.Postleitzahl;
+        hash = 83 * hash + Objects.hashCode(this.Postleitzahl);
         hash = 83 * hash + Objects.hashCode(this.Ort);
         hash = 83 * hash + Objects.hashCode(this.Land);
         return hash;
@@ -105,7 +117,7 @@ public class Adresse implements Serializable {
         if (this.Hausnummer != other.Hausnummer) {
             return false;
         }
-        if (this.Postleitzahl != other.Postleitzahl) {
+        if (!Objects.equals(this.Postleitzahl, other.Postleitzahl)) {
             return false;
         }
         if (!Objects.equals(this.Hausnummerzusatz, other.Hausnummerzusatz)) {

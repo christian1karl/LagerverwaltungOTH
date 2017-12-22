@@ -2,9 +2,18 @@ package de.othr.sw.lagerhaus.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
 
 
 @MappedSuperclass
@@ -13,21 +22,29 @@ public abstract class Person implements Serializable {
     
     private String Nachname;
     private String Vorname;
-    //private Date Geburtsdatum;
-    private Adresse Adresse;
+    
+    @NotNull
+    @Past
+    @Temporal(TemporalType.DATE)
+    private Date Geburtsdatum;
+    
+    @Valid
+    private Adresse Adresse = new Adresse();
+    
+    @Pattern(regexp = "[^@]+@[^@]+\\.[^@]+")
     private String Emailadresse;
+    
     //private Date Erstelldatum;
     private String Benutzername;
     private String Passwort;
 
     public Person(){
-        
     }
 
     public Person(String Nachname, String Vorname, Date Geburtsdatum, Adresse Adresse, String Emailadresse, Date Erstelldatum, String Benutzername, String Passwort) {
         this.Nachname = Nachname;
         this.Vorname = Vorname;
-       // this.Geburtsdatum = Geburtsdatum;
+        this.Geburtsdatum = Geburtsdatum;
         this.Adresse = Adresse;
         this.Emailadresse = Emailadresse;
        // this.Erstelldatum = Erstelldatum;
@@ -52,13 +69,13 @@ public abstract class Person implements Serializable {
         this.Vorname = Vorname;
     }
 
-//    public Date getGeburtsdatum() {
-//        return Geburtsdatum;
-//    }
-//
-//    public void setGeburtsdatum(Date Geburtsdatum) {
-//        this.Geburtsdatum = Geburtsdatum;
-//    }
+    public Date getGeburtsdatum() {
+        return Geburtsdatum;
+    }
+
+    public void setGeburtsdatum(Date Geburtsdatum) {
+        this.Geburtsdatum = Geburtsdatum;
+    }
 
     public Adresse getAdresse() {
         return Adresse;

@@ -4,55 +4,65 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Ausgabe-Tags h:outputXxx Title</title>
+        <title>Konto registrieren</title>
     </h:head>
     <h:body>
-        <h:form>
-        <h:panelGrid columns="2">
+        <h:form id="form">
+        <h:panelGrid columns="3">
                         
-            <h:outputText value="Benutzername:"/>
-            <h:inputText value="#{registrierungModel.benutzername}"/>
+            <h:outputLabel value="Benutzername:" for="benutzername"/>
+            <h:inputText id="benutzername" value="#{registrierungModel.kunde.benutzername}"/>
+            <h:message for="benutzername" />
             
-            <h:outputText id="passwordField1" value="Passwort:"/>
-            <h:inputSecret value="#{registrierungModel.passwort}" required="true" validatorMessage="Passwort1 muss zwischen 8 und 15 Zeichen haben">
-                <f:validateLength minimum="8" maximum="15"/>
-            </h:inputSecret>
+            <h:outputLabel value="Passwort:" for="passwort"/>
+            <h:inputSecret id="passwort" value="#{registrierungModel.kunde.passwort}"/>
+            <h:message for="passwort"/>
+  
+            <h:outputLabel value="Vorname:" for="vorname"/>
+            <h:inputText id="vorname" value="#{registrierungModel.kunde.vorname}"/>
+            <h:message for="vorname"/>
             
-            <h:outputText value="Passwort wiederholen:"/>
-            <h:inputSecret value="#{registrierungModel.passwort2}" required="true" validatorMessage="Passwort2 muss zwischen 8 und 15 Zeichen haben">
-                <f:validateLength minimum="8" maximum="15"/>
-            </h:inputSecret>
+            <h:outputLabel value="Nachname:" for="nachname"/>
+            <h:inputText id="nachname" value="#{registrierungModel.kunde.nachname}"/>
+            <h:message for="nachname"/>
             
-            <h:outputText value="Vorname:"/>
-            <h:inputText value="#{registrierungModel.vorname}"/>
+            <h:outputLabel value="geburtsDatum " for="geburtsDatum" />
+            <h:inputText id="geburtsDatum" value="#{registrierungModel.kunde.geburtsdatum}">
+                <f:convertDateTime />
+            </h:inputText>
+            <h:message for="geburtsDatum" />
             
-            <h:outputText value="Nachname:"/>
-            <h:inputText value="#{registrierungModel.nachname}"/>
+            <h:outputLabel value="Strasse:" for="strasse"/>
+            <h:inputText id="strasse" value="#{registrierungModel.kunde.adresse.strasse}"/>
+            <h:message for="strasse"/>
             
-            <h:outputText value="Strasse:"/>
-            <h:inputText value="#{registrierungModel.strasse}"/>
+            <h:outputLabel value="Hausnummer:" for="hausnummer"/>
+            <h:inputText id="hausnummer" value="#{registrierungModel.kunde.adresse.hausnummer}"/>
+            <h:message for="hausnummer"/>
             
-            <h:outputText value="Hausnummer:"/>
-            <h:inputText value="#{registrierungModel.hausnummer}"/>
+            <h:outputLabel for="hausnummerzusatz" value="Hausnummer-Zusatz:"/>
+            <h:inputText id="hausnummerzusatz" value="#{registrierungModel.kunde.adresse.hausnummerzusatz}"/>
+            <h:message for="hausnummerzusatz"/>
             
-            <h:outputText value="Hausnummer-Zusatz:"/>
-            <h:inputText value="#{registrierungModel.hausnummerzusatz}"/>
+            <h:outputLabel value="Postleitzahl:" for="postleitzahl"/>
+            <h:inputText id="postleitzahl" value="#{registrierungModel.kunde.adresse.postleitzahl}"/>
+            <h:message for="postleitzahl"/>
             
-            <h:outputText value="Postleitzahl:"/>
-            <h:inputText value="#{registrierungModel.postleitzahl}"/>
+            <h:outputLabel value="Ort:" for="ort"/>
+            <h:inputText id="ort" value="#{registrierungModel.kunde.adresse.ort}"/>
+            <h:message for="ort"/>
             
-            <h:outputText value="Ort:"/>
-            <h:inputText value="#{registrierungModel.ort}"/>
-            
-            <h:outputText value="Land:"/>
-            <h:inputText value="#{registrierungModel.land}"/>
+            <h:outputLabel value="Land:" for="land"/>
+            <h:inputText id="land" value="#{registrierungModel.kunde.adresse.land}"/>
+            <h:message for="land"/>
 
-            <h:outputText value="Email-Adresse:"/>
-            <h:inputText value="#{registrierungModel.emailadresse}"/>
+            <h:outputLabel for="emailadresse" value="Email-Adresse:"/>
+            <h:inputText id="emailadresse" value="#{registrierungModel.kunde.emailadresse}"/>
+            <h:message for="emailadresse"/>
          
-            <h:commandButton value="Konto erstellen" action="#{registrierungModel.pruefeRegistrierung()}"/>
-            
-            <h:message for="passwordField1"/>
+            <h:commandButton value="Konto erstellen" action="#{registrierungModel.pruefeRegistrierung()}">
+                <!--f:ajax execute="@form" render="@form" /-->
+            </h:commandButton>
         </h:panelGrid>
         </h:form>
     </h:body>
