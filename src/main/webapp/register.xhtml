@@ -7,77 +7,66 @@
       <ui:define name="content">
         <h1>Kundenkonto erstellen:</h1>
         <br/>
-        <h:panelGrid columns="2">
-          <h:panelGroup>
-            <h:outputLabel value="Accountdaten: " style="font-weight:bold" for="accountForm"/>
-            <br/>
-            <h:form id="accountForm">
-              <h:panelGrid columns="3">
-                <h:outputLabel value="Benutzername: " for="benutzername" />
-                <h:inputText id="benutzername" value="#{registierungModel.kunde.benutzername}" />
-                <h:message for="benutzername" />  
+        <h:form id="accountForm">
+          <h:outputLabel value="Accountdaten: " style="font-weight:bold" for="accountForm"/>
+           <br/>
+          <h:panelGrid columns="3">
+            
+            <h:outputLabel value="Benutzername " for="benutzername" />
+            <h:inputText id="benutzername" value="#{registierungModel.kunde.benutzername}" />
+            <h:message for="benutzername" />  
 
-                <h:outputLabel value="Passwort: " for="passwort" />
-                <h:inputSecret id="passwort" value="#{registierungModel.kunde.passwort}" />
-                <h:message for="passwort" />
+            <h:outputLabel value="Passwort: " for="passwort" />
+            <h:inputSecret id="passwort" value="#{registierungModel.kunde.passwort}" />
+            <h:message for="passwort" />
 
-                <h:outputLabel value="Passwort wiederholen: " for="passwort2" />
-                <h:inputSecret id="passwort2" value="#{registierungModel.kunde.passwort}" />
-                <h:message for="passwort2" />
-              </h:panelGrid>
-            </h:form>
-          </h:panelGroup>
-          
-          <h:panelGroup>
-            <h:outputLabel value="Persönliche Daten: " style="font-weight:bold" for="personalInformationForm"/>
-            <br/>
-            <h:form id="personalInformationForm">
-              <h:panelGrid columns="3">
-                 <h:outputLabel value="Vorname: " for="vorname" />
-                <h:inputText id="vorname" value="#{registierungModel.kunde.vorname}" />
-                <h:message for="vorname" />
+            <h:outputLabel value="Passwort wiederholen" for="passwort2" />
+            <h:inputSecret id="passwort2" value="#{registierungModel.kunde.passwort}" />
+            <h:message for="passwort2" />
 
-                <h:outputLabel value="Nachname: " for="nachname" />
-                <h:inputText id="nachname" value="#{registierungModel.kunde.nachname}" />
-                <h:message for="nachname" />
+             
+             <h:outputLabel value="Vorname: " for="vorname" />
+            <h:inputText id="vorname" value="#{registierungModel.kunde.vorname}" />
+            <h:message for="vorname" />
 
-                <h:outputLabel value="Geburtsdatum: " for="geburtsdatum" />
-                <h:inputText id="geburtsdatum" value="#{registierungModel.kunde.geburtsDatum}">
-                  <f:convertDateTime />
-                </h:inputText>
-                <h:message for="geburtsdatum" />
+            <h:outputLabel value="Nachname: " for="nachname" />
+            <h:inputText id="nachname" value="#{registierungModel.kunde.nachname}" />
+            <h:message for="nachname" />
 
-                <h:outputLabel value="Straße: " for="strasse" />
-                <h:inputText id="strasse" value="#{registierungModel.kunde.adresse.strasse}" />
-                <h:message for="strasse" />
+            <h:outputLabel value="Geburtsdatum: " for="geburtsdatum" />
+            <h:inputText id="geburtsdatum" value="#{registierungModel.kunde.geburtsDatum}">
+              <f:convertDateTime />
+            </h:inputText>
+            <h:message for="geburtsdatum" />
 
-                <h:outputLabel value="Hausnummer: " for="hausnummer" />
-                <h:inputText id="hausnummer" value="#{registierungModel.kunde.adresse.hausnummer}" />
-                <h:message for="hausnummer" />
+            <h:outputLabel value="Straße: " for="strasse" />
+            <h:inputText id="strasse" value="#{registierungModel.kunde.adresse.strasse}" />
+            <h:message for="strasse" />
 
-                <h:outputLabel value="Postleitzahl: " for="plz" />
-                <h:inputText id="plz" value="#{registierungModel.kunde.adresse.plz}" />
-                <h:message for="plz" />
+            <h:outputLabel value="Hausnummer: " for="hausnummer" />
+            <h:inputText id="hausnummer" value="#{registierungModel.kunde.adresse.hausnummer}" />
+            <h:message for="hausnummer" />
 
-                <h:outputLabel value="Ort: " for="ort" />
-                <h:inputText id="ort" value="#{registierungModel.kunde.adresse.ort}" />
-                <h:message for="ort" />
+            <h:outputLabel value="Postleitzahl: " for="plz" />
+            <h:inputText id="plz" value="#{registierungModel.kunde.adresse.plz}" />
+            <h:message for="plz" />
 
-                <h:outputLabel value="E-mail: " for="email" />
-                <h:inputText id="email" value="#{registierungModel.kunde.email}" />
-                <h:message for="email" />
-              </h:panelGrid>
-            </h:form>
-          <br/>
-          </h:panelGroup>
-        </h:panelGrid>
-        
-        <br/>
-        
+            <h:outputLabel value="Ort: " for="ort" />
+            <h:inputText id="ort" value="#{registierungModel.kunde.adresse.ort}" />
+            <h:message for="ort" />
+
+            <h:outputLabel value="E-mail: " for="email" />
+            <h:inputText id="email" value="#{registierungModel.kunde.email}" />
+            <h:message for="email" />
+            
+           </h:panelGrid>
+           
+        </h:form>  
         <h:commandButton value="Account erstellen" action="#{registierungModel.doOk()}">
           <f:ajax execute="@form" render="@form" />
         </h:commandButton>
         <h:messages globalOnly="true" />
+
       </ui:define>
     </ui:composition>
   </body>
