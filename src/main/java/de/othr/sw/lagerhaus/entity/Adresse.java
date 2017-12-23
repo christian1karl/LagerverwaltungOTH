@@ -1,29 +1,29 @@
 package de.othr.sw.lagerhaus.entity;
 
+import de.othr.sw.lagerhaus.validation.ValidPlz;
 import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 
 @Embeddable
 @Access(AccessType.FIELD)
 public class Adresse implements Serializable
 {
     
-  @Size(min = 1)
+  @ValidNotEmptyString
   private String strasse;
 
-  @Pattern(regexp = "\\d{5}", message = "muss genau 5 Ziffern enthalten")
+  @ValidPlz
   private String plz;
 
-  @Size(min = 1)
+  @ValidNotEmptyString
   private String ort;
   
-  @Size(min = 1)
+  @ValidNotEmptyString
   private String hausnummer;
   
    public String getStrasse()

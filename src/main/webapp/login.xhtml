@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+  <head>
+    <title>Kunde Registrieren</title>
+  </head>
+  <body>
+    <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      
+      <ui:define name="menu">
+			<ul>
+				<li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
+				<li><a href="register.xhtml" accesskey="1" title="">Register</a></li>
+				<li class="current_page_item"><a href="login.xhtml" accesskey="2" title="">Login</a></li>
+				<li><a href="aboutus.xhtml" accesskey="3" title="">About Us</a></li>
+			</ul>
+      </ui:define>
+      
+      <ui:define name="content">
+        <h1>Login:</h1>
+        <br/>
+        <h:form id="loginForm">
+          <h:outputLabel value="Accountdaten: " style="font-weight:bold" for="loginForm"/>
+           <br/>
+          <h:panelGrid columns="3">
+            
+            <h:outputLabel value="Benutzername " for="benutzername" />
+            <h:inputText id="benutzername" value="#{loginModel.benutzername}" />
+            <h:message for="benutzername" style="color:red" />  
+
+            <h:outputLabel value="Passwort: " for="passwort" />
+            <h:inputSecret id="passwort" value="#{loginModel.passwort}" />
+            <h:message for="passwort" style="color:red"/>
+            
+           </h:panelGrid>
+        </h:form>  
+        
+        <h:commandButton value="einloggen" action="#{loginModel.doOk()}">
+          <f:ajax execute="@form" render="@form" />
+        </h:commandButton>
+        <h:messages globalOnly="true" />
+
+      </ui:define>
+    </ui:composition>
+  </body>
+</html>

@@ -20,19 +20,21 @@
 			</div>
 		</div>
 		<div id="menu" class="container">
+          <ui:insert name="menu"> 
 			<ul>
 				<li class="current_page_item"><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
 				<li><a href="register.xhtml" accesskey="1" title="">Register</a></li>
 				<li><a href="#" accesskey="2" title="">Log-In</a></li>
 				<li><a href="#" accesskey="3" title="">About Us</a></li>
 			</ul>
+          </ui:insert>
 		</div>
 	</div>
 	<div id="page" class="container">
 		 <ui:insert name="content">Content</ui:insert>
 	</div>
 	<!--div id="portfolio-wrapper">
-		
+		brauch ich derzeit nicht
 	</div-->
 </div>
 <div id="footer">

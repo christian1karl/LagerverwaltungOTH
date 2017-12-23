@@ -4,6 +4,16 @@
   </head>
   <body>
     <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      
+      <ui:define name="menu">
+			<ul>
+				<li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
+				<li class="current_page_item"><a href="register.xhtml" accesskey="1" title="">Register</a></li>
+				<li><a href="login.xhtml" accesskey="2" title="">Log-In</a></li>
+				<li><a href="aboutus.xhtml" accesskey="3" title="">About Us</a></li>
+			</ul>
+      </ui:define>
+      
       <ui:define name="content">
         <h1>Kundenkonto erstellen:</h1>
         <br/>
@@ -14,50 +24,49 @@
             
             <h:outputLabel value="Benutzername " for="benutzername" />
             <h:inputText id="benutzername" value="#{registierungModel.kunde.benutzername}" />
-            <h:message for="benutzername" />  
+            <h:message for="benutzername" style="color:red" />  
 
             <h:outputLabel value="Passwort: " for="passwort" />
             <h:inputSecret id="passwort" value="#{registierungModel.kunde.passwort}" />
-            <h:message for="passwort" />
+            <h:message for="passwort" style="color:red"/>
 
             <h:outputLabel value="Passwort wiederholen" for="passwort2" />
             <h:inputSecret id="passwort2" value="#{registierungModel.kunde.passwort}" />
-            <h:message for="passwort2" />
-
-             
-             <h:outputLabel value="Vorname: " for="vorname" />
+            <h:message for="passwort2" style="color:red"/>
+            
+            <h:outputLabel value="Vorname: " for="vorname" />
             <h:inputText id="vorname" value="#{registierungModel.kunde.vorname}" />
-            <h:message for="vorname" />
+            <h:message for="vorname" style="color:red"/>
 
             <h:outputLabel value="Nachname: " for="nachname" />
             <h:inputText id="nachname" value="#{registierungModel.kunde.nachname}" />
-            <h:message for="nachname" />
+            <h:message for="nachname" style="color:red"/>
 
             <h:outputLabel value="Geburtsdatum: " for="geburtsdatum" />
             <h:inputText id="geburtsdatum" value="#{registierungModel.kunde.geburtsDatum}">
               <f:convertDateTime />
             </h:inputText>
-            <h:message for="geburtsdatum" />
+            <h:message for="geburtsdatum" style="color:red"/>
 
             <h:outputLabel value="Straße: " for="strasse" />
             <h:inputText id="strasse" value="#{registierungModel.kunde.adresse.strasse}" />
-            <h:message for="strasse" />
+            <h:message for="strasse" style="color:red"/>
 
             <h:outputLabel value="Hausnummer: " for="hausnummer" />
             <h:inputText id="hausnummer" value="#{registierungModel.kunde.adresse.hausnummer}" />
-            <h:message for="hausnummer" />
+            <h:message for="hausnummer" style="color:red"/>
 
             <h:outputLabel value="Postleitzahl: " for="plz" />
             <h:inputText id="plz" value="#{registierungModel.kunde.adresse.plz}" />
-            <h:message for="plz" />
+            <h:message for="plz" style="color:red"/>
 
             <h:outputLabel value="Ort: " for="ort" />
             <h:inputText id="ort" value="#{registierungModel.kunde.adresse.ort}" />
-            <h:message for="ort" />
+            <h:message for="ort" style="color:red"/>
 
             <h:outputLabel value="E-mail: " for="email" />
             <h:inputText id="email" value="#{registierungModel.kunde.email}" />
-            <h:message for="email" />
+            <h:message for="email" style="color:red"/>
             
            </h:panelGrid>
            

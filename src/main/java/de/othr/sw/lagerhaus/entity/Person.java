@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 
 
 @MappedSuperclass
@@ -21,10 +21,10 @@ import javax.validation.constraints.Size;
 public abstract class Person implements Serializable
 {
     
-    @Size(min = 1)
+    @ValidNotEmptyString
     private String vorname;
     
-    @Size(min = 1)
+    @ValidNotEmptyString
     private String nachname;
 
     @NotNull
@@ -38,14 +38,13 @@ public abstract class Person implements Serializable
     @Pattern(regexp = "[^@]+@[^@]+\\.[^@]+")
     private String email;
 
-    @Size(min = 1)
+    @ValidNotEmptyString
     private String benutzername;
     
-    @Size(min = 1)
+    @ValidNotEmptyString
     private String passwort;
 
 
-    
     public Date getGeburtsDatum()
     {
       return this.geburtsDatum;
