@@ -7,39 +7,34 @@ import javax.persistence.Id;
 @Entity
 public class Mitarbeiter extends Person implements Serializable{
     
-    @Id
-    private int Mitarbeiternummer;
-    
-    private String Taetigkeit;
-    
-    private double Gehalt;
-    
-    public int getMitarbeiternummer() {
-        return Mitarbeiternummer;
-    }
+  @Id
+  private int mitarbeiternummer;
 
-    public void setMitarbeiternummer(int Mitarbeiternummer) {
-        this.Mitarbeiternummer = Mitarbeiternummer;
-    }
+  private String taetigkeit;
 
-    public String getTaetigkeit() {
-        return Taetigkeit;
-    }
+  private double gehalt;
 
-    public void setTaetigkeit(String Taetigkeit) {
-        this.Taetigkeit = Taetigkeit;
-    }
+  public int getMitarbeiternummer() {
+      return mitarbeiternummer;
+  }
 
-    public double getGehalt() {
-        return Gehalt;
-    }
+  public void setMitarbeiternummer(int Mitarbeiternummer) {
+      this.mitarbeiternummer = Mitarbeiternummer;
+  }
 
-    public void setGehalt(double Gehalt) {
-        this.Gehalt = Gehalt;
-    }
-    
-    
-    
-    
-    
+  public String getTaetigkeit() {
+      return taetigkeit;
+  }
+
+  public void setTaetigkeit(String Taetigkeit) {
+      this.taetigkeit = Taetigkeit;
+  }
+
+  public double getGehalt() {
+      return gehalt;
+  }
+
+  public void setGehalt(double Gehalt) {
+      this.gehalt = Gehalt;
+  }    
 }

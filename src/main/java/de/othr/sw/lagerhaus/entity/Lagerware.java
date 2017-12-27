@@ -8,37 +8,42 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Lagerware implements Serializable{
     
-    @Id
-    private int Lagerwarennummer;
-    private String Warenbezeichnung;
-    //private Lagerauftrag Einlagerungsauftrag;
-    //private Lagerauftrag Auslagerungsauftrag;
-    @ManyToOne
-    private Lagerplatz Lagerplatz;
+  @Id
+  private int Lagerwarennummer;
+  
+  private String Warenbezeichnung;
+  
+  @ManyToOne
+  private Lagerauftrag Einlagerungsauftrag;
+  
+  //private Lagerauftrag Auslagerungsauftrag;
+  
+  @ManyToOne
+  private Lagerplatz Lagerplatz;
 
-    public int getLagerwarennummer() {
-        return Lagerwarennummer;
-    }
+  public int getLagerwarennummer() {
+      return Lagerwarennummer;
+  }
 
-    public void setLagerwarennummer(int Lagerwarennummer) {
-        this.Lagerwarennummer = Lagerwarennummer;
-    }
+  public void setLagerwarennummer(int Lagerwarennummer) {
+      this.Lagerwarennummer = Lagerwarennummer;
+  }
 
-    public String getWarenbezeichnung() {
-        return Warenbezeichnung;
-    }
+  public String getWarenbezeichnung() {
+      return Warenbezeichnung;
+  }
 
-    public void setWarenbezeichnung(String Warenbezeichnung) {
-        this.Warenbezeichnung = Warenbezeichnung;
-    }
+  public void setWarenbezeichnung(String Warenbezeichnung) {
+      this.Warenbezeichnung = Warenbezeichnung;
+  }
 
-    public Lagerplatz getLagerplatz() {
-        return Lagerplatz;
-    }
+  public Lagerplatz getLagerplatz() {
+      return Lagerplatz;
+  }
 
-    public void setLagerplatz(Lagerplatz Lagerplatz) {
-        this.Lagerplatz = Lagerplatz;
-    }
-    
-    
+  public void setLagerplatz(Lagerplatz Lagerplatz) {
+      this.Lagerplatz = Lagerplatz;
+  }
+
+
 }

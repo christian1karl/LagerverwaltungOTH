@@ -27,7 +27,7 @@ public abstract class Person implements Serializable
     @ValidNotEmptyString
     private String nachname;
 
-    @NotNull
+    @NotNull(message= "{NotEmptyString.message}")
     @Past
     @Temporal(TemporalType.DATE)
     private Date geburtsDatum;
@@ -35,6 +35,7 @@ public abstract class Person implements Serializable
     @Valid
     private Adresse adresse = new Adresse();
 
+    @NotNull(message= "{NotEmptyString.message}")
     @Pattern(regexp = "[^@]+@[^@]+\\.[^@]+")
     private String email;
 
