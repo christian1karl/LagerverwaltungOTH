@@ -16,7 +16,7 @@ public class KundenService {
     private EntityManager em;
     
     @Transactional
-    public Kunde KundeAnlegen(Kunde k)
+    public Kunde KundeRegistrieren(Kunde k)
     {
         k.setKundennummer(new Random().nextInt(9999999));
         
