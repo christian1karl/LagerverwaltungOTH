@@ -17,7 +17,8 @@ public class Lagerplatz implements Serializable {
     private double Lagerpreis;
     @Enumerated(EnumType.STRING)
     private Lagerstatus Lagerstatus;
-    @OneToMany(mappedBy= "Lagerplatz")
+
+    @OneToMany(mappedBy = "Lagerplatz")
     private List<Lagerware> Lagerwaren;
 
     public int getLagerplatznummer() {

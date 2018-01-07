@@ -25,7 +25,7 @@ public class RegistierungModel implements Serializable
 
     public void doOk()
     {
-        kundenservice.KundeRegistrieren(kunde);
+        kundenservice.registrieren(kunde);
     }
 
 

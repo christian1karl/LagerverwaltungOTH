@@ -5,15 +5,6 @@
   <body>
     <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
       
-      <ui:define name="menu">
-			<ul>
-				<li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
-				<li class="current_page_item"><a href="register.xhtml" accesskey="1" title="">Register</a></li>
-				<li><a href="login.xhtml" accesskey="2" title="">Log-In</a></li>
-				<li><a href="aboutus.xhtml" accesskey="3" title="">About Us</a></li>
-			</ul>
-      </ui:define>
-      
       <ui:define name="content">
         <h1>Kundenkonto erstellen:</h1>
         <br/>
@@ -70,11 +61,12 @@
             
            </h:panelGrid>
            
-        </h:form>  
         <h:commandButton value="Account erstellen" action="#{registierungModel.doOk()}">
           <f:ajax execute="@form" render="@form" />
         </h:commandButton>
         <h:messages globalOnly="true" />
+        </h:form>  
+       
 
       </ui:define>
     </ui:composition>

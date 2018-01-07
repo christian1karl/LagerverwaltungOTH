@@ -1,5 +1,6 @@
 package de.othr.sw.lagerhaus.model;
 
+import de.othr.sw.lagerhaus.entity.Kunde;
 import de.othr.sw.lagerhaus.service.KundenService;
 import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 import java.io.Serializable;
@@ -15,6 +16,10 @@ public class LoginModel implements Serializable
 {
   @Inject
   private KundenService kundenservice;
+  
+  private Kunde aktuellerKunde;
+  
+  private boolean loginFehler;
 
   @ValidNotEmptyString
   private String benutzername;
@@ -38,9 +43,45 @@ public class LoginModel implements Serializable
     this.passwort = passwort;
   }
 
-  public void doOk()
+  public Kunde getAktuellerKunde() {
+    return aktuellerKunde;
+  }
+
+  public void setAktuellerKunde(Kunde aktuellerKunde) {
+    this.aktuellerKunde = aktuellerKunde;
+  }
+
+  public boolean isLoginFehler() {
+    return loginFehler;
+  }
+
+  public void setLoginFehler(boolean loginFehler) {
+    this.loginFehler = loginFehler;
+  }
+    
+  public boolean hatAktuellenKunden()
   {
-     //
+    return !(aktuellerKunde == null);
+  }
+    
+  public String einloggen() {
+    this.aktuellerKunde = kundenservice.einloggen(benutzername, passwort);
+    this.benutzername = "";
+    this.passwort = "";
+    this.loginFehler = false;
+    if(this.aktuellerKunde == null){
+       loginFehler = true;
+        return "login_fehler";}
+    else
+        return "login_ok";
+  }
+
+  public String ausloggen() {
+      this.benutzername = "";
+      this.passwort = "";
+      this.aktuellerKunde = null;
+      loginFehler = false;
+      return "login_user";
   }
 
 

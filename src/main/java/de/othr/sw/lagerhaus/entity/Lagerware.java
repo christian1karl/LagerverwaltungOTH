@@ -3,6 +3,7 @@ package de.othr.sw.lagerhaus.entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,13 +13,17 @@ public class Lagerware implements Serializable{
   private int Lagerwarennummer;
   
   private String Warenbezeichnung;
-  
+
   @ManyToOne
+  @JoinColumn(name="Einlagerungsauftrag")
   private Lagerauftrag Einlagerungsauftrag;
-  
-  //private Lagerauftrag Auslagerungsauftrag;
-  
+
   @ManyToOne
+  @JoinColumn(name="Auslagerungsauftrag")
+  private Lagerauftrag Auslagerungsauftrag;
+
+  @ManyToOne
+  @JoinColumn(name="Lagerplatz")
   private Lagerplatz Lagerplatz;
 
   public int getLagerwarennummer() {
