@@ -4,10 +4,19 @@
     <h:body>
         <ui:component>
             <ul>
-				<li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
-				<li><a href="register.xhtml" accesskey="1" title="">Register</a></li>
-				<li><a href="login.xhtml" accesskey="2" title="">Login</a></li>
-				<li><a href="aboutus.xhtml" accesskey="3" title="">About Us</a></li>
+              <li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
+                <h:panelGroup rendered="#{!loginModel.hatAktuellenKunden()}">
+                  <li><a href="register.xhtml" accesskey="2" title="">Register</a></li> 
+                </h:panelGroup>
+                <h:panelGroup rendered="#{loginModel.hatAktuellenKunden()}">
+                  <li><a href="auftrag.xhtml" accesskey="3" title="">Neuer Auftrag</a></li>
+                </h:panelGroup>
+				<h:panelGroup rendered="#{loginModel.hatAktuellenKunden()}">
+                  <li><a href="waren.xhtml" accesskey="4" title="">Meine Waren</a></li>
+                </h:panelGroup>
+
+				<!--li><a href="login.xhtml" accesskey="5" title="">Mitarbeiterlogin</a></li-->
+               
 			</ul>
         </ui:component>
     </h:body>
