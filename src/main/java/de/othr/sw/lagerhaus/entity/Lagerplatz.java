@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Lagerplatz implements Serializable {
@@ -20,6 +22,42 @@ public class Lagerplatz implements Serializable {
 
     @OneToMany(mappedBy = "Lagerplatz")
     private List<Lagerware> Lagerwaren;
+    
+    @Min(1)
+    @Max(10000)
+    private int hoehe;
+
+    @Min(1)
+    @Max(10000)
+    private int breite;
+
+    @Min(1)
+    @Max(10000)
+    private int laenge;
+
+    public int getHoehe() {
+      return hoehe;
+    }
+
+    public void setHoehe(int hoehe) {
+      this.hoehe = hoehe;
+    }
+
+    public int getBreite() {
+      return breite;
+    }
+
+    public void setBreite(int breite) {
+      this.breite = breite;
+    }
+
+    public int getLaenge() {
+      return laenge;
+    }
+
+    public void setLaenge(int laenge) {
+      this.laenge = laenge;
+    }
 
     public int getLagerplatznummer() {
         return Lagerplatznummer;

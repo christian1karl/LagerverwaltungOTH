@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+  <head>
+    <title>Lagerhaus</title>
+  </head>
+  <body>
+    <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      <ui:define name="content">
+        <h1>Lagerauftrag</h1>
+        <br/>
+        Bitte definieren Sie zuerst, welche Ware sie anlegen wollen.
+        <br/>
+        <h:form id="warenForm">
+          <h:outputLabel value="Lagerwaren: " style="font-weight:bold" for="accountForm"/>
+           <br/>
+          <h:panelGrid columns="3">
+            
+            <h:selectOneMenu value="#{lagerModel.aktuellerAuftrag.auftragstyp}" >
+              <f:selectItems value="#{lagerModel.auftragstyp}" />
+            </h:selectOneMenu>
+            
+            <h:outputLabel value="Bezeichnung: " for="warenbezeichnung" />
+            <h:inputText id="warenbezeichnung" value="#{lagerModel.aktuelleWare.warenbezeichnung}" />
+            <h:message for="warenbezeichnung" style="color:red" />  
+            
+            <h:outputLabel value="Höhe: " for="warenhoehe" />
+            <h:inputText id="warenhoehe" value="#{lagerModel.aktuelleWare.hoehe}" />
+            <h:message for="warenhoehe" style="color:red" />  
+            
+            <h:outputLabel value="Breite: " for="warenbreite" />
+            <h:inputText id="warenbreite" value="#{lagerModel.aktuelleWare.breite}" />
+            <h:message for="warenbreite" style="color:red" />  
+            
+            <h:outputLabel value="Länge: " for="warenlaenge" />
+            <h:inputText id="warenlaenge" value="#{lagerModel.aktuelleWare.laenge}" />
+            <h:message for="warenlaenge" style="color:red" />  
+
+           </h:panelGrid>
+           
+           <h:commandButton value="Ware einlagern" action="#{lagerModel.auftragBearbeiten()}">
+          <f:ajax execute="@form" render="@form" />
+        </h:commandButton>
+        <h:messages globalOnly="true" />
+        </h:form>  
+
+      </ui:define>
+    </ui:composition>
+  </body>
+</html>

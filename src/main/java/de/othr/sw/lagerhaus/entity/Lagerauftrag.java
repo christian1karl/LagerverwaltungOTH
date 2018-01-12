@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,6 +29,7 @@ public class Lagerauftrag implements Serializable{
   @Temporal(javax.persistence.TemporalType.DATE)
   private Date Auftragsdatum;
 
+  @Enumerated(EnumType.STRING)
   private Auftragstyp Auftragstyp;
 
   @ManyToOne

@@ -15,7 +15,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 
-
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Person implements Serializable
@@ -44,6 +43,9 @@ public abstract class Person implements Serializable
     
     @ValidNotEmptyString
     private String passwort;
+    
+    
+    private String salt;
 
 
     public Date getGeburtsDatum()
