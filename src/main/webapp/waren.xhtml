@@ -9,34 +9,39 @@
         <br/>
         Bitte definieren Sie zuerst, welche Ware sie anlegen wollen.
         <br/>
-        <h:form id="warenForm">
-          <h:outputLabel value="Lagerwaren: " style="font-weight:bold" for="accountForm"/>
+        <h:form id="auftragForm">
+          <h:outputLabel value="Auftrag: " style="font-weight:bold" for="auftragForm"/>
            <br/>
           <h:panelGrid columns="3">
             
-            <h:selectOneMenu value="#{lagerModel.aktuellerAuftrag.auftragstyp}" >
-              <f:selectItems value="#{lagerModel.auftragstyp}" />
+            <h:outputLabel value="Auftragstyp: " for="auftragstyp"/>
+            <h:selectOneMenu id="auftragstyp" value="#{auftragModel.aktuellerAuftrag.auftragstyp}" >
+              <f:selectItems value="#{auftragModel.auftragstyp}" />
             </h:selectOneMenu>
+            <h:message for="auftragstyp" style="color:red" />
             
             <h:outputLabel value="Bezeichnung: " for="warenbezeichnung" />
-            <h:inputText id="warenbezeichnung" value="#{lagerModel.aktuelleWare.warenbezeichnung}" />
+            <h:inputText id="warenbezeichnung" value="#{auftragModel.warenBezeichnung}" />
             <h:message for="warenbezeichnung" style="color:red" />  
             
-            <h:outputLabel value="Höhe: " for="warenhoehe" />
-            <h:inputText id="warenhoehe" value="#{lagerModel.aktuelleWare.hoehe}" />
-            <h:message for="warenhoehe" style="color:red" />  
+            <h:dataTable id="waren" var="ware" value="#{auftragModel.aktuelleWaren}" border="1">
+              <f:facet name="header">
+                <h:outputText value="Lagerwaren" />
+              </f:facet>
+              
+              <h:column>
+                <f:facet name="header">
+                  <h:outputText value="Bezeichnung" />
+                </f:facet>
+                <h:outputText value="#{ware.warenbezeichnung}" />
+              </h:column>
+            </h:dataTable>
+           
+            <h:commandButton value="hinzufuegen" action="#{auftragModel.wareZurListeHinzufuegen()}"/>
             
-            <h:outputLabel value="Breite: " for="warenbreite" />
-            <h:inputText id="warenbreite" value="#{lagerModel.aktuelleWare.breite}" />
-            <h:message for="warenbreite" style="color:red" />  
-            
-            <h:outputLabel value="Länge: " for="warenlaenge" />
-            <h:inputText id="warenlaenge" value="#{lagerModel.aktuelleWare.laenge}" />
-            <h:message for="warenlaenge" style="color:red" />  
-
            </h:panelGrid>
            
-           <h:commandButton value="Ware einlagern" action="#{lagerModel.auftragBearbeiten()}">
+           <h:commandButton value="Ware einlagern" action="#{auftragModel.auftragBearbeiten()}">
           <f:ajax execute="@form" render="@form" />
         </h:commandButton>
         <h:messages globalOnly="true" />

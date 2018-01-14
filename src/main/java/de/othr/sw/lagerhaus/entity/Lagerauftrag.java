@@ -21,10 +21,10 @@ public class Lagerauftrag implements Serializable{
   private int lagerauftragsnummer;
 
   @OneToMany(mappedBy = "Einlagerungsauftrag")
-  private List<Lagerware> EinlagerungsWare;
+  private List<Lagerware> EinlagerungsWaren;
   
   @OneToMany(mappedBy = "Auslagerungsauftrag")
-  private List<Lagerware> AuslagerungsWare;
+  private List<Lagerware> AuslagerungsWaren;
 
   @Temporal(javax.persistence.TemporalType.DATE)
   private Date Auftragsdatum;
@@ -44,20 +44,20 @@ public class Lagerauftrag implements Serializable{
     this.lagerauftragsnummer = lagerauftragsnummer;
   }
 
-  public List<Lagerware> getEinlagerungsWare() {
-    return EinlagerungsWare;
+  public List<Lagerware> getEinlagerungsWaren() {
+    return EinlagerungsWaren;
   }
 
-  public void setEinlagerungsWare(List<Lagerware> EinlagerungsWare) {
-    this.EinlagerungsWare = EinlagerungsWare;
+  public void setEinlagerungsWaren(List<Lagerware> EinlagerungsWare) {
+    this.EinlagerungsWaren = EinlagerungsWare;
   }
 
-  public List<Lagerware> getAuslagerungsWare() {
-    return AuslagerungsWare;
+  public List<Lagerware> getAuslagerungsWaren() {
+    return AuslagerungsWaren;
   }
 
-  public void setAuslagerungsWare(List<Lagerware> AuslagerungsWare) {
-    this.AuslagerungsWare = AuslagerungsWare;
+  public void setAuslagerungsWaren(List<Lagerware> AuslagerungsWare) {
+    this.AuslagerungsWaren = AuslagerungsWare;
   }
   
   public Date getAuftragsdatum() {

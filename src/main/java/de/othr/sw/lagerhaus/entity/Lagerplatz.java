@@ -3,62 +3,30 @@ package de.othr.sw.lagerhaus.entity;
 import de.othr.sw.lagerhaus.enums.Lagerstatus;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 @Entity
 public class Lagerplatz implements Serializable {
     
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int Lagerplatznummer;
+    
     private double Lagerpreis;
+    
     @Enumerated(EnumType.STRING)
     private Lagerstatus Lagerstatus;
 
     @OneToMany(mappedBy = "Lagerplatz")
     private List<Lagerware> Lagerwaren;
     
-    @Min(1)
-    @Max(10000)
-    private int hoehe;
-
-    @Min(1)
-    @Max(10000)
-    private int breite;
-
-    @Min(1)
-    @Max(10000)
-    private int laenge;
-
-    public int getHoehe() {
-      return hoehe;
-    }
-
-    public void setHoehe(int hoehe) {
-      this.hoehe = hoehe;
-    }
-
-    public int getBreite() {
-      return breite;
-    }
-
-    public void setBreite(int breite) {
-      this.breite = breite;
-    }
-
-    public int getLaenge() {
-      return laenge;
-    }
-
-    public void setLaenge(int laenge) {
-      this.laenge = laenge;
-    }
-
     public int getLagerplatznummer() {
         return Lagerplatznummer;
     }
@@ -89,7 +57,8 @@ public class Lagerplatz implements Serializable {
 
     public void setLagerwaren(List<Lagerware> Lagerwaren) {
         this.Lagerwaren = Lagerwaren;
-    }
+    }   
+    
 
     @Override
     public int hashCode() {
