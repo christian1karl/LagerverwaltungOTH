@@ -4,9 +4,13 @@ import de.othr.sw.lagerhaus.enums.Auftragstyp;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +22,14 @@ import javax.persistence.Temporal;
 public class Lagerauftrag implements Serializable{
     
   @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int lagerauftragsnummer;
 
   @OneToMany(mappedBy = "Einlagerungsauftrag")
   private List<Lagerware> EinlagerungsWaren;
   
   @OneToMany(mappedBy = "Auslagerungsauftrag")
+  
   private List<Lagerware> AuslagerungsWaren;
 
   @Temporal(javax.persistence.TemporalType.DATE)

@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+  <head>
+    <title>Lagerhaus</title>
+  </head>
+  <body>
+    <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      <ui:define name="content">
+        <h1>Einlagerungsauftrag</h1>
+        <br/>
+        Bitte geben Sie an, welche Waren Sie einlagern möchten!
+        
+        <h:form id="auftragForm">
+                        
+          <h:panelGrid columns="3">
+            
+            <h:outputLabel value="Bezeichnung: " for="warenbezeichnung" />
+            <h:inputText id="warenbezeichnung" value="#{warenkorbModel.aktuelleWare.warenbezeichnung}" />
+            <h:message for="warenbezeichnung" style="color:red" />  
+            
+          </h:panelGrid>
+          
+          <h:commandButton value="hinzufuegen" action="#{warenkorbModel.wareZumWarenkorbHinzufuegen()}">
+            <f:ajax execute="@form" render="@form" />
+          </h:commandButton>
+
+          
+          <h:dataTable id="waren" var="ware" value="#{warenkorbModel.aktuellerWarenkorb}" border="1">
+            <f:facet name="header">
+              <h:outputText value="Einlagerungsliste" />
+            </f:facet>
+            
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Warenbezeichnung" />
+              </f:facet>
+              <h:outputText value="#{ware.warenbezeichnung}" />
+            </h:column>
+            
+            <h:column>
+              <h:commandButton value="X" action="#{warenkorbModel.wareVonWarenkorbEntfernen(ware)}" style="color:red">
+                <f:ajax execute="@form" render="@form" />
+              </h:commandButton>
+            </h:column>
+
+
+          </h:dataTable>
+          <h:message for="waren" style="color:red" />  
+          <br/>
+          
+          <h:commandButton value="Ware einlagern" action="#{auftragModel.einlagerungsAuftragBearbeiten()}">
+           <f:ajax execute="@form" render="@form" />
+          </h:commandButton>
+          <h:messages globalOnly="true" />
+          
+        </h:form>  
+
+      </ui:define>
+    </ui:composition>
+  </body>
+</html>

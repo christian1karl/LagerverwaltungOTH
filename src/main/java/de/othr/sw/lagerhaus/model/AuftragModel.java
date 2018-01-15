@@ -10,33 +10,27 @@ import de.othr.sw.lagerhaus.service.LagerService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class AuftragModel implements Serializable {
 
   @Inject
   private LagerService lagerservice;
-
+  
+  @Inject
+  private LoginModel loginModel;
+  
+  @Inject
+  private WarenkorbModel warenkorbModel;
+  
   private Lagerauftrag aktuellerAuftrag = new Lagerauftrag();
 
   private Lagerplatz aktuellerLagerplatz = new Lagerplatz();
-
-  private List<Lagerware> aktuelleWaren = new ArrayList<>();
-
-  private String warenBezeichnung;
-
-  public String getWarenBezeichnung() {
-    return warenBezeichnung;
-  }
-
-  public void setWarenBezeichnung(String warenBezeichnung) {
-    this.warenBezeichnung = warenBezeichnung;
-  }
 
   public Lagerplatz getLagerplatz() {
     return aktuellerLagerplatz;
@@ -54,14 +48,6 @@ public class AuftragModel implements Serializable {
     this.aktuellerAuftrag = aktuellerAuftrag;
   }
 
-  public List<Lagerware> getAktuelleWaren() {
-    return aktuelleWaren;
-  }
-
-  public void setAktuelleWaren(List<Lagerware> aktuelleWaren) {
-    this.aktuelleWaren = aktuelleWaren;
-  }
-
   public Auftragstyp[] getAuftragstyp() {
     return Auftragstyp.values();
   }
@@ -72,19 +58,10 @@ public class AuftragModel implements Serializable {
     lagerservice.lagerplatzAnlegen(aktuellerLagerplatz);
   }
 
-  public String auftragBearbeiten() {
+  public String auslagerungsAuftragBearbeiten() {
     lagerwarenZumAuftragHinzufuegen();
+    aktuellerAuftrag.setAuftraggeber(loginModel.getAktuellerKunde());
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
-
-    if (aktuellerAuftrag.getAuftragstyp() == Auftragstyp.Einlagerung) {
-      List<Lagerware> waren = bearbeiteterAuftrag.getEinlagerungsWaren();
-      for (Lagerware ware : waren) {
-        if (ware.getLagerplatz() == null) {
-          return "kein_freier_lagerplatz";
-        }
-      }
-      return "auftrag_erfolgreich";
-    } else {
       List<Lagerware> waren = bearbeiteterAuftrag.getAuslagerungsWaren();
       for (Lagerware ware : waren) {
         if (ware.getLagerplatz() != null) {
@@ -92,23 +69,33 @@ public class AuftragModel implements Serializable {
         }
       }
       return "auftrag_erfolgreich";
-    }
-
+  }
+  
+  public String einlagerungsAuftragBearbeiten()
+  {
+    lagerplatzAnlegen();    
+    aktuellerAuftrag.setAuftragstyp(Auftragstyp.Einlagerung);
+    lagerwarenZumAuftragHinzufuegen();
+    aktuellerAuftrag.setAuftraggeber(loginModel.getAktuellerKunde());
+    Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
+    
+    List<Lagerware> waren = bearbeiteterAuftrag.getEinlagerungsWaren();
+      for (Lagerware ware : waren) {
+        if (ware.getLagerplatz() == null) {
+          return "kein_freier_lagerplatz";
+        }
+      }
+      this.warenkorbModel.getAktuellerWarenkorb().clear();
+      this.aktuellerAuftrag = new Lagerauftrag();
+      return "auftrag_erfolgreich";
   }
 
   public void lagerwarenZumAuftragHinzufuegen() {
     if (this.aktuellerAuftrag.getAuftragstyp() == Auftragstyp.Einlagerung) {
-      aktuellerAuftrag.setEinlagerungsWaren(aktuelleWaren);
+      aktuellerAuftrag.setEinlagerungsWaren(this.warenkorbModel.getAktuellerWarenkorb());
     } else {
-      aktuellerAuftrag.setAuslagerungsWaren(aktuelleWaren);
+      aktuellerAuftrag.setAuslagerungsWaren(this.warenkorbModel.getAktuellerWarenkorb());
     }
   }
-
-  public String wareZurListeHinzufuegen() {
-    Lagerware ware = new Lagerware();
-    ware.setWarenbezeichnung(warenBezeichnung);
-    aktuelleWaren.add(ware);
-    return "ware_zur_Liste_hinzugefuegt";
-  }
-
+  
 }

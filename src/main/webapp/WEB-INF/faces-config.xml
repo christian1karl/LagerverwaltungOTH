@@ -15,9 +15,19 @@
         </navigation-case>
         
         <navigation-case>
-            <from-outcome>ware_zur_Liste_hinzugefuegt</from-outcome>
-            <to-view-id>/waren.xhtml</to-view-id>
+            <from-outcome>ware_zur_Einlagerungsliste_hinzugefuegt</from-outcome>
+            <to-view-id>/einlagern.xhtml</to-view-id>
         </navigation-case>
              
+        <navigation-case>
+            <from-outcome>einlagern</from-outcome>
+            <to-view-id>/einlagern.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>auslagern</from-outcome>
+            <to-view-id>/auslagern.xhtml</to-view-id>
+        </navigation-case>
+        
     </navigation-rule>
 </faces-config>

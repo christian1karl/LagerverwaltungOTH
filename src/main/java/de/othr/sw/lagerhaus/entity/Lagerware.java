@@ -1,6 +1,5 @@
 package de.othr.sw.lagerhaus.entity;
 
-import de.othr.sw.lagerhaus.enums.Lagerstatus;
 import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,51 +9,50 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 @Entity
-public class Lagerware implements Serializable{
-    
+public class Lagerware implements Serializable {
+
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int Lagerwarennummer;
-  
+
   @ValidNotEmptyString
   private String Warenbezeichnung;
 
   @ManyToOne
-  @JoinColumn(name="Einlagerungsauftrag")
+  @JoinColumn(name = "Einlagerungsauftrag")
   private Lagerauftrag Einlagerungsauftrag;
 
   @ManyToOne
-  @JoinColumn(name="Auslagerungsauftrag")
+  @JoinColumn(name = "Auslagerungsauftrag")
   private Lagerauftrag Auslagerungsauftrag;
 
   @ManyToOne
-  @JoinColumn(name="Lagerplatz")
-  private Lagerplatz Lagerplatz;  
+  @JoinColumn(name = "Lagerplatz")
+  private Lagerplatz Lagerplatz;
 
   public int getLagerwarennummer() {
-      return Lagerwarennummer;
+    return Lagerwarennummer;
   }
 
   public void setLagerwarennummer(int Lagerwarennummer) {
-      this.Lagerwarennummer = Lagerwarennummer;
+    this.Lagerwarennummer = Lagerwarennummer;
   }
 
   public String getWarenbezeichnung() {
-      return Warenbezeichnung;
+    return Warenbezeichnung;
   }
 
   public void setWarenbezeichnung(String Warenbezeichnung) {
-      this.Warenbezeichnung = Warenbezeichnung;
+    this.Warenbezeichnung = Warenbezeichnung;
   }
 
   public Lagerplatz getLagerplatz() {
-      return Lagerplatz;
+    return Lagerplatz;
   }
 
   public void setLagerplatz(Lagerplatz Lagerplatz) {
-      this.Lagerplatz = Lagerplatz;
+    this.Lagerplatz = Lagerplatz;
   }
 
   public Lagerauftrag getEinlagerungsauftrag() {
@@ -77,8 +75,5 @@ public class Lagerware implements Serializable{
   public String toString() {
     return Warenbezeichnung;
   }
-  
-
-  
 
 }

@@ -38,8 +38,9 @@ public class LagerService {
             return lagerauftrag;
           eingelagerteWare.setEinlagerungsauftrag(lagerauftrag);
           em.merge(eingelagerteWare);
+          em.persist(lagerauftrag);
         }
-        em.persist(lagerauftrag);
+        em.merge(lagerauftrag);
 
       } else {
         List<Lagerware> waren = lagerauftrag.getAuslagerungsWaren();
@@ -84,7 +85,7 @@ public class LagerService {
     em.merge(ware);
     return ware;
   }
-
+  
   public Lagerplatz findeFreienLagerplatz() {
       Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.Lagerstatus like:lagerstatus")
               .setParameter("lagerstatus", Lagerstatus.Frei);
