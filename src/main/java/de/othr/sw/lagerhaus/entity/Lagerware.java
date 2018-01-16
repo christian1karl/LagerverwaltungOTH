@@ -2,6 +2,7 @@ package de.othr.sw.lagerhaus.entity;
 
 import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -75,5 +76,48 @@ public class Lagerware implements Serializable {
   public String toString() {
     return Warenbezeichnung;
   }
+
+  @Override
+  public int hashCode() {
+    int hash = 5;
+    hash = 53 * hash + this.Lagerwarennummer;
+    hash = 53 * hash + Objects.hashCode(this.Warenbezeichnung);
+    hash = 53 * hash + Objects.hashCode(this.Einlagerungsauftrag);
+    hash = 53 * hash + Objects.hashCode(this.Auslagerungsauftrag);
+    hash = 53 * hash + Objects.hashCode(this.Lagerplatz);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Lagerware other = (Lagerware) obj;
+    if (this.Lagerwarennummer != other.Lagerwarennummer) {
+      return false;
+    }
+    if (!Objects.equals(this.Warenbezeichnung, other.Warenbezeichnung)) {
+      return false;
+    }
+    if (!Objects.equals(this.Einlagerungsauftrag, other.Einlagerungsauftrag)) {
+      return false;
+    }
+    if (!Objects.equals(this.Auslagerungsauftrag, other.Auslagerungsauftrag)) {
+      return false;
+    }
+    if (!Objects.equals(this.Lagerplatz, other.Lagerplatz)) {
+      return false;
+    }
+    return true;
+  }
+  
+  
 
 }
