@@ -15,7 +15,6 @@ public class Kunde extends Person implements Serializable{
   @OneToMany(mappedBy = "Auftraggeber")
   private List<Lagerauftrag> lagerauftraege;
 
-  
   public List<Lagerauftrag> getLagerauftraege() {
     return lagerauftraege;
   }
@@ -23,7 +22,6 @@ public class Kunde extends Person implements Serializable{
   public void setLagerauftraege(List<Lagerauftrag> lagerauftraege) {
     this.lagerauftraege = lagerauftraege;
   }
-  
   
   public int getKundennummer() {
     return kundennummer;
