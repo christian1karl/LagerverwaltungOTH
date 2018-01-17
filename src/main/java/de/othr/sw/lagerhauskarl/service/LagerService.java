@@ -1,18 +1,22 @@
-package de.othr.sw.lagerhaus.service;
+package de.othr.sw.lagerhauskarl.service;
 
-import de.othr.sw.lagerhaus.entity.Lagerauftrag;
-import de.othr.sw.lagerhaus.entity.Lagerplatz;
-import de.othr.sw.lagerhaus.entity.Lagerware;
-import de.othr.sw.lagerhaus.enums.Auftragstyp;
-import de.othr.sw.lagerhaus.enums.Lagerstatus;
+import de.othr.sw.lagerhauskarl.entity.Lagerauftrag;
+import de.othr.sw.lagerhauskarl.entity.Lagerplatz;
+import de.othr.sw.lagerhauskarl.entity.Lagerware;
+import de.othr.sw.lagerhauskarl.enums.Auftragstyp;
+import de.othr.sw.lagerhauskarl.enums.Lagerstatus;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+
+@WebService
 @RequestScoped
 public class LagerService {
 
@@ -26,6 +30,7 @@ public class LagerService {
   }
 
   @Transactional
+  @WebMethod
   public Lagerauftrag auftragBearbeiten(Lagerauftrag lagerauftrag) {
 
     if (lagerauftrag.getAuftragstyp() == Auftragstyp.Einlagerung) {
@@ -35,7 +40,7 @@ public class LagerService {
       for (int i = 0; i < waren.size(); i++) {
         Lagerware eingelagerteWare = wareEinlagern(waren.get(i));
         if (eingelagerteWare == null) {
-          return lagerauftrag;
+          return null;
         }
         eingelagerteWare.setEinlagerungsauftrag(lagerauftrag);
         em.merge(eingelagerteWare);
@@ -47,13 +52,15 @@ public class LagerService {
     } else {
       List<Lagerware> waren = lagerauftrag.getAuslagerungsWaren();
       for (Lagerware ware : waren) {
-        Lagerware neueWare = wareAuslagern(ware);
-        neueWare.setAuslagerungsauftrag(lagerauftrag);
-
-        //Collections.replaceAll(waren, ware, neueWare);
+        Lagerware ausgelagerteWare = wareAuslagern(ware);
+        if (ausgelagerteWare == null) {
+          return null;
+        }
+        
+        ausgelagerteWare.setAuslagerungsauftrag(lagerauftrag);
         lagerauftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
         em.persist(lagerauftrag);
-        em.merge(neueWare);
+        em.merge(ausgelagerteWare);
       }
 
       em.merge(lagerauftrag);

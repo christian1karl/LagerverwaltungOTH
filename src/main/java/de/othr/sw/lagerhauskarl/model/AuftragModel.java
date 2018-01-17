@@ -1,11 +1,11 @@
-package de.othr.sw.lagerhaus.model;
+package de.othr.sw.lagerhauskarl.model;
 
-import de.othr.sw.lagerhaus.entity.Lagerauftrag;
-import de.othr.sw.lagerhaus.entity.Lagerplatz;
-import de.othr.sw.lagerhaus.entity.Lagerware;
-import de.othr.sw.lagerhaus.enums.Auftragstyp;
-import de.othr.sw.lagerhaus.enums.Lagerstatus;
-import de.othr.sw.lagerhaus.service.LagerService;
+import de.othr.sw.lagerhauskarl.entity.Lagerauftrag;
+import de.othr.sw.lagerhauskarl.entity.Lagerplatz;
+import de.othr.sw.lagerhauskarl.entity.Lagerware;
+import de.othr.sw.lagerhauskarl.enums.Auftragstyp;
+import de.othr.sw.lagerhauskarl.enums.Lagerstatus;
+import de.othr.sw.lagerhauskarl.service.LagerService;
 
 import java.io.Serializable;
 import java.util.ArrayList;

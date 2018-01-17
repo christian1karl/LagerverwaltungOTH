@@ -1,4 +1,4 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
 import java.io.Serializable;
 import java.util.List;

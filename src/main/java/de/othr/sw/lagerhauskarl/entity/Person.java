@@ -1,4 +1,4 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
+import de.othr.sw.lagerhauskarl.validation.ValidNotEmptyString;
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

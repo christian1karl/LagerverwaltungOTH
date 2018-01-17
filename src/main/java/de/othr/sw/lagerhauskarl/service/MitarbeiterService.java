@@ -1,6 +1,6 @@
-package de.othr.sw.lagerhaus.service;
+package de.othr.sw.lagerhauskarl.service;
 
-import de.othr.sw.lagerhaus.entity.Mitarbeiter;
+import de.othr.sw.lagerhauskarl.entity.Mitarbeiter;
 import java.util.Random;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;

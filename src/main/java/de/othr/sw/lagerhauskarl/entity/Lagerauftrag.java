@@ -1,6 +1,6 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
-import de.othr.sw.lagerhaus.enums.Auftragstyp;
+import de.othr.sw.lagerhauskarl.enums.Auftragstyp;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;

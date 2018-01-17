@@ -1,13 +1,13 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
-import de.othr.sw.lagerhaus.validation.ValidPlz;
+import de.othr.sw.lagerhauskarl.validation.ValidPlz;
 import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
+import de.othr.sw.lagerhauskarl.validation.ValidNotEmptyString;
 
 @Embeddable
 @Access(AccessType.FIELD)

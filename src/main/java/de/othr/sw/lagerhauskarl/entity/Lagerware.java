@@ -1,6 +1,6 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
-import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
+import de.othr.sw.lagerhauskarl.validation.ValidNotEmptyString;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;

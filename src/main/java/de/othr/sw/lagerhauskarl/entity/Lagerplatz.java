@@ -1,6 +1,6 @@
-package de.othr.sw.lagerhaus.entity;
+package de.othr.sw.lagerhauskarl.entity;
 
-import de.othr.sw.lagerhaus.enums.Lagerstatus;
+import de.othr.sw.lagerhauskarl.enums.Lagerstatus;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;

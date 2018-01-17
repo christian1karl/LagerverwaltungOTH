@@ -1,8 +1,8 @@
-package de.othr.sw.lagerhaus.model;
+package de.othr.sw.lagerhauskarl.model;
 
-import de.othr.sw.lagerhaus.entity.Kunde;
-import de.othr.sw.lagerhaus.service.KundenService;
-import de.othr.sw.lagerhaus.validation.ValidNotEmptyString;
+import de.othr.sw.lagerhauskarl.entity.Kunde;
+import de.othr.sw.lagerhauskarl.service.KundenService;
+import de.othr.sw.lagerhauskarl.validation.ValidNotEmptyString;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;

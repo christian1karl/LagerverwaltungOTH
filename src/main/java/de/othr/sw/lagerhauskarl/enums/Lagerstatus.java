@@ -1,4 +1,4 @@
-package de.othr.sw.lagerhaus.enums;
+package de.othr.sw.lagerhauskarl.enums;
 
 
 public enum Lagerstatus {

@@ -1,7 +1,7 @@
-package de.othr.sw.lagerhaus.model;
+package de.othr.sw.lagerhauskarl.model;
 
-import de.othr.sw.lagerhaus.entity.Lagerware;
-import de.othr.sw.lagerhaus.service.LagerService;
+import de.othr.sw.lagerhauskarl.entity.Lagerware;
+import de.othr.sw.lagerhauskarl.service.LagerService;
 
 import java.io.Serializable;
 import java.util.ArrayList;

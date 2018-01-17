@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.othr.sw</groupId>
-    <artifactId>Lagerhaus</artifactId>
+    <artifactId>LagerhausKarl</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>Lagerhaus</name>
+    <name>LagerhausKarl</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
