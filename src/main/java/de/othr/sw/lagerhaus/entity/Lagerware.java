@@ -10,81 +10,85 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
+
 @Entity
 public class Lagerware implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int Lagerwarennummer;
+  private int lagerwarennummer;
 
   @ValidNotEmptyString
-  private String Warenbezeichnung;
+  private String warenbezeichnung;
 
   @ManyToOne
   @JoinColumn(name = "Einlagerungsauftrag")
-  private Lagerauftrag Einlagerungsauftrag;
+  private Lagerauftrag einlagerungsauftrag;
 
   @ManyToOne
   @JoinColumn(name = "Auslagerungsauftrag")
-  private Lagerauftrag Auslagerungsauftrag;
+  private Lagerauftrag auslagerungsauftrag;
 
   @ManyToOne
   @JoinColumn(name = "Lagerplatz")
-  private Lagerplatz Lagerplatz;
-
+  private Lagerplatz lagerplatz;
+ 
+  
   public int getLagerwarennummer() {
-    return Lagerwarennummer;
+    return lagerwarennummer;
   }
 
   public void setLagerwarennummer(int Lagerwarennummer) {
-    this.Lagerwarennummer = Lagerwarennummer;
+    this.lagerwarennummer = Lagerwarennummer;
   }
 
   public String getWarenbezeichnung() {
-    return Warenbezeichnung;
+    return warenbezeichnung;
   }
 
   public void setWarenbezeichnung(String Warenbezeichnung) {
-    this.Warenbezeichnung = Warenbezeichnung;
+    this.warenbezeichnung = Warenbezeichnung;
   }
 
   public Lagerplatz getLagerplatz() {
-    return Lagerplatz;
+    return lagerplatz;
   }
 
   public void setLagerplatz(Lagerplatz Lagerplatz) {
-    this.Lagerplatz = Lagerplatz;
+    this.lagerplatz = Lagerplatz;
   }
 
   public Lagerauftrag getEinlagerungsauftrag() {
-    return Einlagerungsauftrag;
+    return einlagerungsauftrag;
   }
 
   public void setEinlagerungsauftrag(Lagerauftrag Einlagerungsauftrag) {
-    this.Einlagerungsauftrag = Einlagerungsauftrag;
+    this.einlagerungsauftrag = Einlagerungsauftrag;
   }
 
   public Lagerauftrag getAuslagerungsauftrag() {
-    return Auslagerungsauftrag;
+    return auslagerungsauftrag;
   }
 
   public void setAuslagerungsauftrag(Lagerauftrag Auslagerungsauftrag) {
-    this.Auslagerungsauftrag = Auslagerungsauftrag;
+    this.auslagerungsauftrag = Auslagerungsauftrag;
   }
+  
 
   @Override
   public String toString() {
-    return Warenbezeichnung;
+    return warenbezeichnung;
   }
 
   @Override
   public int hashCode() {
     int hash = 5;
-    hash = 53 * hash + this.Lagerwarennummer;
-    hash = 53 * hash + Objects.hashCode(this.Warenbezeichnung);
-    hash = 53 * hash + Objects.hashCode(this.Einlagerungsauftrag);
-    hash = 53 * hash + Objects.hashCode(this.Auslagerungsauftrag);
-    hash = 53 * hash + Objects.hashCode(this.Lagerplatz);
+    hash = 53 * hash + this.lagerwarennummer;
+    hash = 53 * hash + Objects.hashCode(this.warenbezeichnung);
+    hash = 53 * hash + Objects.hashCode(this.einlagerungsauftrag);
+    hash = 53 * hash + Objects.hashCode(this.auslagerungsauftrag);
+    hash = 53 * hash + Objects.hashCode(this.lagerplatz);
     return hash;
   }
 
@@ -100,22 +104,19 @@ public class Lagerware implements Serializable {
       return false;
     }
     final Lagerware other = (Lagerware) obj;
-    if (this.Lagerwarennummer != other.Lagerwarennummer) {
+    if (this.lagerwarennummer != other.lagerwarennummer) {
       return false;
     }
-    if (!Objects.equals(this.Warenbezeichnung, other.Warenbezeichnung)) {
+    if (!Objects.equals(this.warenbezeichnung, other.warenbezeichnung)) {
       return false;
     }
-    if (!Objects.equals(this.Einlagerungsauftrag, other.Einlagerungsauftrag)) {
+    if (!Objects.equals(this.einlagerungsauftrag, other.einlagerungsauftrag)) {
       return false;
     }
-    if (!Objects.equals(this.Auslagerungsauftrag, other.Auslagerungsauftrag)) {
+    if (!Objects.equals(this.auslagerungsauftrag, other.auslagerungsauftrag)) {
       return false;
     }
-    if (!Objects.equals(this.Lagerplatz, other.Lagerplatz)) {
-      return false;
-    }
-    return true;
+    return Objects.equals(this.lagerplatz, other.lagerplatz);
   }
   
   

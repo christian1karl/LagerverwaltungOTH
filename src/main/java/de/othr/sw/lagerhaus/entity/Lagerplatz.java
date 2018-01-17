@@ -3,94 +3,109 @@ package de.othr.sw.lagerhaus.entity;
 import de.othr.sw.lagerhaus.enums.Lagerstatus;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Lagerplatz implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int Lagerplatznummer;
-    
-    private double Lagerpreis;
-    
-    @Enumerated(EnumType.STRING)
-    private Lagerstatus Lagerstatus;
 
-    @OneToMany(mappedBy = "Lagerplatz")
-    private List<Lagerware> Lagerwaren;
-    
-    public int getLagerplatznummer() {
-        return Lagerplatznummer;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int lagerplatznummer;
 
-    public void setLagerplatznummer(int Lagerplatznummer) {
-        this.Lagerplatznummer = Lagerplatznummer;
-    }
-    
-    public double getLagerpreis() {
-        return Lagerpreis;
-    }
+  private double lagerpreis;
 
-    public void setLagerpreis(double Lagerpreis) {
-        this.Lagerpreis = Lagerpreis;
-    }
+  @Enumerated(EnumType.STRING)
+  private Lagerstatus lagerstatus;
 
-    public Lagerstatus getLagerstatus() {
-        return Lagerstatus;
-    }
+  @OneToMany(mappedBy = "lagerplatz",  fetch=FetchType.EAGER)
+  private List<Lagerware> lagerwaren;
 
-    public void setLagerstatus(Lagerstatus Lagerstatus) {
-        this.Lagerstatus = Lagerstatus;
-    }
+  @Min(1)
+  @Max(50)
+  private int lagerwarenkapazitaet;
 
-    public List<Lagerware> getLagerwaren() {
-        return Lagerwaren;
-    }
+  public int getLagerplatznummer() {
+    return lagerplatznummer;
+  }
 
-    public void setLagerwaren(List<Lagerware> Lagerwaren) {
-        this.Lagerwaren = Lagerwaren;
-    }   
-    
+  public void setLagerplatznummer(int Lagerplatznummer) {
+    this.lagerplatznummer = Lagerplatznummer;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + this.Lagerplatznummer;
-        return hash;
-    }
+  public double getLagerpreis() {
+    return lagerpreis;
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Lagerplatz other = (Lagerplatz) obj;
-        if (this.Lagerplatznummer != other.Lagerplatznummer) {
-            return false;
-        }
-        return true;
-    }
+  public void setLagerpreis(double Lagerpreis) {
+    this.lagerpreis = Lagerpreis;
+  }
 
-    @Override
-    public String toString() {
-        return "Lagerplatz{" + "Lagernummer=" + Lagerplatznummer + ", Lagerpreis=" + Lagerpreis + ", Lagerstatus=" + Lagerstatus + ", Lagerwaren=" + Lagerwaren + '}';
+  public Lagerstatus getLagerstatus() {
+    return lagerstatus;
+  }
+
+  public void setLagerstatus(Lagerstatus Lagerstatus) {
+    this.lagerstatus = Lagerstatus;
+  }
+
+  public List<Lagerware> getLagerwaren() {
+    return lagerwaren;
+  }
+
+  public void setLagerwaren(List<Lagerware> Lagerwaren) {
+    this.lagerwaren = Lagerwaren;
+  }
+
+  public int getLagerwarenkapazitaet() {
+    return lagerwarenkapazitaet;
+  }
+
+  public void setLagerwarenkapazitaet(int Lagerwarenkapazitet) {
+    this.lagerwarenkapazitaet = Lagerwarenkapazitet;
+  }
+  
+  public int getAnzahlFreierStellplaetze()
+  {
+    return this.getLagerwarenkapazitaet()-this.getLagerwaren().size();
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 3;
+    hash = 59 * hash + this.lagerplatznummer;
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-        
-    
-    
-    
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Lagerplatz other = (Lagerplatz) obj;
+    if (this.lagerplatznummer != other.lagerplatznummer) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Lagerplatz{" + "Lagernummer=" + lagerplatznummer + ", Lagerpreis=" + lagerpreis + ", Lagerstatus=" + lagerstatus + ", Lagerwaren=" + lagerwaren + '}';
+  }
+
 }

@@ -4,30 +4,41 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <navigation-rule>
-        <description>
-            Globale Navigationsregeln, gültig für alle Pageflows
-        </description>
+  <navigation-rule>
+    <description>
+      Globale Navigationsregeln, gültig für alle Pageflows
+    </description>
         
-        <navigation-case>
-            <from-outcome>login_ok</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
+    <navigation-case>
+      <from-outcome>login_ok</from-outcome>
+      <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
         
-        <navigation-case>
-            <from-outcome>ware_zur_Einlagerungsliste_hinzugefuegt</from-outcome>
-            <to-view-id>/einlagern.xhtml</to-view-id>
-        </navigation-case>
-             
-        <navigation-case>
-            <from-outcome>einlagern</from-outcome>
-            <to-view-id>/einlagern.xhtml</to-view-id>
-        </navigation-case>
+    <navigation-case>
+      <from-outcome>ware_zur_Einlagerungsliste_hinzugefuegt</from-outcome>
+      <to-view-id>/einlagern.xhtml</to-view-id>
+    </navigation-case>
         
-        <navigation-case>
-            <from-outcome>auslagern</from-outcome>
-            <to-view-id>/auslagern.xhtml</to-view-id>
-        </navigation-case>
+    <navigation-case>
+      <from-outcome>einlagerung_erfolgreich</from-outcome>
+      <to-view-id>/einlagern_ok.xhtml</to-view-id>
+    </navigation-case>
         
-    </navigation-rule>
+    <navigation-case>
+      <from-outcome>einlagerungsliste_leer</from-outcome>
+      <to-view-id>/einlagern.xhtml</to-view-id>
+    </navigation-case>
+            
+    <navigation-case>
+      <from-outcome>ware_aus_warenkorb_gelöscht</from-outcome>
+      <to-view-id>/einlagern.xhtml</to-view-id>
+    </navigation-case>
+    
+    <navigation-case>
+      <from-outcome>auftrag_erfolgreich</from-outcome>
+      <to-view-id>/einlagern_ok.xhtml</to-view-id>
+    </navigation-case>
+        
+        
+  </navigation-rule>
 </faces-config>

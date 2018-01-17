@@ -23,7 +23,7 @@ public class AuftragModel implements Serializable {
   private LagerService lagerservice;
   
   @Inject
-  private LoginModel loginModel;
+  private KundenModel kundenModel;
   
   @Inject
   private WarenkorbModel warenkorbModel;
@@ -54,13 +54,18 @@ public class AuftragModel implements Serializable {
 
   public void lagerplatzAnlegen() {
     aktuellerLagerplatz.setLagerstatus(Lagerstatus.Frei);
+    aktuellerLagerplatz.setLagerpreis(10);
+    aktuellerLagerplatz.setLagerwarenkapazitaet(20);
     aktuellerLagerplatz.setLagerwaren(new ArrayList<Lagerware>());
     lagerservice.lagerplatzAnlegen(aktuellerLagerplatz);
   }
 
   public String auslagerungsAuftragBearbeiten() {
     lagerwarenZumAuftragHinzufuegen();
-    aktuellerAuftrag.setAuftraggeber(loginModel.getAktuellerKunde());
+    aktuellerAuftrag.setAuftragstyp(Auftragstyp.Auslagerung);
+    if(aktuellerAuftrag.getAuslagerungsWaren().isEmpty())
+      return "auslagerungsliste_leer";
+    aktuellerAuftrag.setAuftraggeber(kundenModel.getAktuellerKunde());
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
       List<Lagerware> waren = bearbeiteterAuftrag.getAuslagerungsWaren();
       for (Lagerware ware : waren) {
@@ -68,26 +73,34 @@ public class AuftragModel implements Serializable {
           return "ware_nicht_ausgelagert";
         }
       }
+      this.warenkorbModel.getAlleWaren().clear();
+      this.warenkorbModel.getAktuellerWarenkorb().clear();
+      this.aktuellerAuftrag = new Lagerauftrag();
+      this.warenkorbModel.setGesamtkosten(0);
       return "auftrag_erfolgreich";
   }
   
-  public String einlagerungsAuftragBearbeiten()
-  {
-    lagerplatzAnlegen();    
+  public String einlagerungsAuftragBearbeiten(){
+    this.warenkorbModel.setStatus("");
     aktuellerAuftrag.setAuftragstyp(Auftragstyp.Einlagerung);
     lagerwarenZumAuftragHinzufuegen();
-    aktuellerAuftrag.setAuftraggeber(loginModel.getAktuellerKunde());
+    if(aktuellerAuftrag.getEinlagerungsWaren().isEmpty()){
+      this.warenkorbModel.setStatus("Einlagerungliste ist leer. Keine Waren wurden eingelagert!");
+      return "einlagerungsliste_leer";
+    }
+    aktuellerAuftrag.setAuftraggeber(kundenModel.getAktuellerKunde());
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
     
     List<Lagerware> waren = bearbeiteterAuftrag.getEinlagerungsWaren();
       for (Lagerware ware : waren) {
         if (ware.getLagerplatz() == null) {
-          return "kein_freier_lagerplatz";
+          return "einlagerung_nicht_erfolgreich";
         }
       }
       this.warenkorbModel.getAktuellerWarenkorb().clear();
       this.aktuellerAuftrag = new Lagerauftrag();
-      return "auftrag_erfolgreich";
+      this.warenkorbModel.setGesamtkosten(0);
+      return "einlagerung_erfolgreich";
   }
 
   public void lagerwarenZumAuftragHinzufuegen() {

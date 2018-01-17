@@ -2,9 +2,8 @@ package de.othr.sw.lagerhaus.entity;
 
 import de.othr.sw.lagerhaus.enums.Auftragstyp;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-
 
 @Entity
 public class Lagerauftrag implements Serializable{
@@ -25,22 +22,20 @@ public class Lagerauftrag implements Serializable{
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int lagerauftragsnummer;
 
-  @OneToMany(mappedBy = "Einlagerungsauftrag")
-  private List<Lagerware> EinlagerungsWaren;
+  @OneToMany(mappedBy = "einlagerungsauftrag", fetch = FetchType.EAGER)
+  private List<Lagerware> einlagerungsWaren;
   
-  @OneToMany(mappedBy = "Auslagerungsauftrag")
-  
-  private List<Lagerware> AuslagerungsWaren;
+  @OneToMany(mappedBy = "auslagerungsauftrag", fetch = FetchType.EAGER)
+  private List<Lagerware> auslagerungsWaren;
 
-  @Temporal(javax.persistence.TemporalType.DATE)
-  private Date Auftragsdatum;
+  private Timestamp auftragsdatum;
 
   @Enumerated(EnumType.STRING)
-  private Auftragstyp Auftragstyp;
+  private Auftragstyp auftragstyp;
 
   @ManyToOne
   @JoinColumn(name="Auftraggeber")
-  private Kunde Auftraggeber;
+  private Kunde auftraggeber;
 
   public int getLagerauftragsnummer() {
     return lagerauftragsnummer;
@@ -51,43 +46,43 @@ public class Lagerauftrag implements Serializable{
   }
 
   public List<Lagerware> getEinlagerungsWaren() {
-    return EinlagerungsWaren;
+    return einlagerungsWaren;
   }
 
   public void setEinlagerungsWaren(List<Lagerware> EinlagerungsWare) {
-    this.EinlagerungsWaren = EinlagerungsWare;
+    this.einlagerungsWaren = EinlagerungsWare;
   }
 
   public List<Lagerware> getAuslagerungsWaren() {
-    return AuslagerungsWaren;
+    return auslagerungsWaren;
   }
 
   public void setAuslagerungsWaren(List<Lagerware> AuslagerungsWare) {
-    this.AuslagerungsWaren = AuslagerungsWare;
+    this.auslagerungsWaren = AuslagerungsWare;
   }
   
-  public Date getAuftragsdatum() {
-    return Auftragsdatum;
+  public Timestamp getAuftragsdatum() {
+    return auftragsdatum;
   }
 
-  public void setAuftragsdatum(Date Auftragsdatum) {
-    this.Auftragsdatum = Auftragsdatum;
+  public void setAuftragsdatum(Timestamp Auftragsdatum) {
+    this.auftragsdatum = Auftragsdatum;
   }
 
   public Auftragstyp getAuftragstyp() {
-    return Auftragstyp;
+    return auftragstyp;
   }
 
   public void setAuftragstyp(Auftragstyp Auftragstyp) {
-    this.Auftragstyp = Auftragstyp;
+    this.auftragstyp = Auftragstyp;
   }
 
   public Kunde getAuftraggeber() {
-    return Auftraggeber;
+    return auftraggeber;
   }
 
   public void setAuftraggeber(Kunde Auftraggeber) {
-    this.Auftraggeber = Auftraggeber;
+    this.auftraggeber = Auftraggeber;
   }
   
   

@@ -1,16 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
   <head>
-    <title>TODO supply a title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lagerhaus</title>
   </head>
   <body>
-    <div>TODO write content</div>
+    <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      <ui:define name="content">
+        <h1>Auslagerungsauftrag</h1>
+        <br/>
+        Bitte geben Sie an, welche Waren Sie auslagern möchten!
+        <br/><br/>
+        <h:form id="auftragForm">
+
+
+          <h:commandButton value="Waren anzeigen" action="#{warenkorbModel.sucheAlleWarenDesAngemeldetenKunden()}">
+            <f:ajax execute="@form" render="@form" />
+          </h:commandButton>
+
+          <br/><br/>
+
+          <h:dataTable id="waren" var="ware" value="#{warenkorbModel.alleWaren}" border="1">
+            <f:facet name="header">
+              <h:outputText value="Bestandsliste" />
+            </f:facet>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Warenbezeichnung" />
+              </f:facet>
+              <h:outputText value="#{ware.warenbezeichnung}" />
+            </h:column>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Eingelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.einlagerungsauftrag.auftragsdatum}" />
+            </h:column>  
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Ausgelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.auslagerungsauftrag.auftragsdatum}" />
+            </h:column>  
+
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Auslagern" />
+              </f:facet>
+              <ui:param name="showTheButton" value="#{warenkorbModel.warenkorbEnthältElement(ware)}"></ui:param>
+              <h:commandButton value="nein" rendered="#{!showTheButton}" action="#{warenkorbModel.wareZumAuslagernWarenkorbHinzufuegen(ware)}">
+                <f:ajax execute="@form" render="@form" />
+              </h:commandButton>
+              <h:commandButton value="ja" rendered="#{showTheButton}" action="#{warenkorbModel.wareVonAuslagernWarenkorbEntfernen(ware)}">
+                <f:ajax execute="@form" render="@form" />
+              </h:commandButton>
+            </h:column>
+          </h:dataTable>
+          <h:message for="waren" style="color:red" />  
+
+
+          <h:commandButton value="Waren auslagern" action="#{auftragModel.auslagerungsAuftragBearbeiten()}">
+            <f:ajax execute="@form" render="@form" />
+          </h:commandButton>
+
+        </h:form>  
+      </ui:define>
+    </ui:composition>
   </body>
 </html>

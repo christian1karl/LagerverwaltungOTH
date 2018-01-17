@@ -5,13 +5,16 @@
         <ui:component>
             <ul>
               <li><a href="index.xhtml" accesskey="1" title="">Homepage</a></li>
-                <h:panelGroup rendered="#{!loginModel.hatAktuellenKunden()}">
+                <h:panelGroup rendered="#{!kundenModel.hatAktuellenKunden()}">
                   <li><a href="register.xhtml" accesskey="2" title="">Register</a></li> 
                 </h:panelGroup>
-                <h:panelGroup rendered="#{loginModel.hatAktuellenKunden()}">
+                <h:panelGroup rendered="#{kundenModel.hatAktuellenKunden()}">
                   <li><a href="einlagern.xhtml" accesskey="3" title="">Waren einlagern</a></li>
                 </h:panelGroup>
-				<h:panelGroup rendered="#{loginModel.hatAktuellenKunden()}">
+                <h:panelGroup rendered="#{kundenModel.hatAktuellenKunden()}">
+                  <li><a href="auslagern.xhtml" accesskey="3" title="">Waren auslagern</a></li>
+                </h:panelGroup>
+				<h:panelGroup rendered="#{kundenModel.hatAktuellenKunden()}">
                   <li><a href="rigster_1.xhtml" accesskey="4" title="">Meine Waren</a></li>
                 </h:panelGroup>
 

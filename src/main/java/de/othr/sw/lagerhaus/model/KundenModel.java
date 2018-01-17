@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class LoginModel implements Serializable
+public class KundenModel implements Serializable
 {
   @Inject
   private KundenService kundenservice;
@@ -59,8 +59,7 @@ public class LoginModel implements Serializable
     this.loginFehler = loginFehler;
   }
     
-  public boolean hatAktuellenKunden()
-  {
+  public boolean hatAktuellenKunden()  {
     return !(aktuellerKunde == null);
   }
     
