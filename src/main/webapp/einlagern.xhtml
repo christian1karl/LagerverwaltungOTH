@@ -9,7 +9,7 @@
         <br/>
         Bitte geben Sie an, welche Waren Sie einlagern möchten!
         <br/><br/>
-        <h:form id="einlagerungsForm">
+        <h:form id="auftragsForm">
 
           <h:panelGrid columns="3">
 
@@ -20,12 +20,12 @@
           </h:panelGrid>
 
           <h:commandButton value="hinzufuegen" action="#{warenkorbModel.wareZumWarenkorbHinzufuegen()}" >
-            <f:ajax execute="@form" render="@form" />
+            <f:ajax execute="@form" render=":auftragsForm :warenkorbForm :kostenForm" />
           </h:commandButton>
-          
+
           <br/><br/>
-
-
+        </h:form>
+        <h:form id="warenkorbForm">
           <h:dataTable id="waren" var="ware" value="#{warenkorbModel.aktuellerWarenkorb}" border="1">
             <f:facet name="header">
               <h:outputText value="Einlagerungsliste" />
@@ -41,31 +41,36 @@
             <br/><br/>
             <h:column>
               <h:commandButton value="X" action="#{warenkorbModel.wareVonWarenkorbEntfernen(ware)}" style="color:red">
-                <f:ajax execute="@form" render="@form" />
+                <f:ajax execute="@form" render=":warenkorbForm :kostenForm" />
               </h:commandButton>
             </h:column>
 
+
+
             <br/><br/>
           </h:dataTable>
+
+
           <h:message for="waren" style="color:red" />  
-          <br/>
+        </h:form>
+        <h:form id="kostenForm">
+        <br/>
+        <h:panelGrid columns="1">
+          <h:outputText value="#{warenkorbModel.status}" style=""/>
+        </h:panelGrid>
 
-          <h:panelGrid columns="1">
-            <h:outputText value="#{warenkorbModel.status}" style=""/>
-          </h:panelGrid>
+        <br/>
+        <h:outputLabel value="Gesamtkosten: " for="gesamtkosten" />
+        <h:outputText id="gesamtkosten" value="#{warenkorbModel.gesamtkosten}" style="font-weight:bold" />
+        <h:outputText id="einheit" value="€" style="font-weight:bold" />
+        <h:message for="gesamtkosten" style="color:red" />  
+        <br/><br/>
+        <h:commandButton value="Waren einlagern" action="#{auftragModel.einlagerungsAuftragBearbeiten()}">
+          <f:ajax execute="@form" render=":auftragsForm :warenkorbForm :kostenForm" />
+        </h:commandButton>
+        <h:messages globalOnly="true"/>
 
-          <br/>
-          <h:outputLabel value="Gesamtkosten: " for="gesamtkosten" />
-          <h:outputText id="gesamtkosten" value="#{warenkorbModel.gesamtkosten}" style="font-weight:bold" />
-          <h:outputText id="einheit" value="€" style="font-weight:bold" />
-          <h:message for="gesamtkosten" style="color:red" />  
-          <br/><br/>
-          <h:commandButton value="Waren einlagern" action="#{auftragModel.einlagerungsAuftragBearbeiten()}">
-            <f:ajax execute="@form" render="@form" />
-          </h:commandButton>
-          <h:messages globalOnly="true"/>
 
-          
         </h:form>  
       </ui:define>
     </ui:composition>

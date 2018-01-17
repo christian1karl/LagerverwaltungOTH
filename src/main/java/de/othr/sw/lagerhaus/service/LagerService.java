@@ -6,7 +6,6 @@ import de.othr.sw.lagerhaus.entity.Lagerware;
 import de.othr.sw.lagerhaus.enums.Auftragstyp;
 import de.othr.sw.lagerhaus.enums.Lagerstatus;
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -103,7 +102,7 @@ public class LagerService {
   
   
   public Lagerware findeLagerware(Lagerware ware) {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.Warenbezeichnung like:ware")
+    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.warenbezeichnung like:ware")
             .setParameter("ware", ware.getWarenbezeichnung());
     List<Lagerware> Lagerwaren = query.getResultList();
 
@@ -116,7 +115,7 @@ public class LagerService {
   }
 
     public Lagerplatz findeLagerplatz(Lagerplatz lagerplatz) {
-    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.Lagerplatznummer like:lagerplatz")
+    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerplatznummer like:lagerplatz")
             .setParameter("lagerplatz", lagerplatz.getLagerplatznummer() );
     List<Lagerplatz> Lagerplaetze = query.getResultList();
 
@@ -129,7 +128,7 @@ public class LagerService {
   }
     
   public Lagerplatz findeFreienLagerplatz() {
-    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.Lagerstatus like:lagerstatus")
+    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerstatus like:lagerstatus")
             .setParameter("lagerstatus", Lagerstatus.Frei);
     List<Lagerplatz> lagerplaetze = query.getResultList();
 
@@ -144,7 +143,7 @@ public class LagerService {
   public int anzahlFreierLagerwarenplaetze() {
     int anzahlFreierPlaetze = 0;
 
-    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.Lagerstatus like:lagerstatus")
+    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerstatus like:lagerstatus")
             .setParameter("lagerstatus", Lagerstatus.Frei);
     List<Lagerplatz> lagerplaetze = query.getResultList();
 
@@ -160,7 +159,7 @@ public class LagerService {
     int anzahlVerbleibenderWarenplaetze = anzahlBenoetigterWarenplaetze - anzahlaktuellerWarenplaetze;
     int kosten = 0;
 
-    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.Lagerstatus like:lagerstatus")
+    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerstatus like:lagerstatus")
             .setParameter("lagerstatus", Lagerstatus.Frei);
     List<Lagerplatz> lagerplaetze = query.getResultList();
 
@@ -184,14 +183,14 @@ public class LagerService {
   }
 
   public List<Lagerware> sucheAlleEingelagertenWarenEinesKunden(int kundennr) {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.Einlagerungsauftrag.Auftraggeber.kundennummer like:kundennr AND c.Auslagerungsauftrag is NULL ")
+    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.einlagerungsauftrag.auftraggeber.kundennummer like:kundennr AND c.auslagerungsauftrag is NULL ")
             .setParameter("kundennr", kundennr);
     return query.getResultList();
 
   }
   
   public List<Lagerware> sucheAlleEingelagertenWaren() {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.Auslagerungsauftrag IS NULL");
+    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.auslagerungsauftrag IS NULL");
     return query.getResultList();
 
   }
