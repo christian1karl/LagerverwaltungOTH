@@ -34,16 +34,8 @@
               <f:facet name="header">
                 <h:outputText value="Eingelagert am" />
               </f:facet>
-              <h:outputText value="#{ware.einlagerungsauftrag.auftragsdatum}" />
+              <h:outputText value="#{ware.lagerauftraege[0].auftragsdatum}" />
             </h:column>  
-
-            <h:column>
-              <f:facet name="header">
-                <h:outputText value="Ausgelagert am" />
-              </f:facet>
-              <h:outputText value="#{ware.auslagerungsauftrag.auftragsdatum}" />
-            </h:column>  
-
 
             <h:column>
               <f:facet name="header">

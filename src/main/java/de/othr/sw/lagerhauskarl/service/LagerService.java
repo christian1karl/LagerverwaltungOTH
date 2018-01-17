@@ -32,17 +32,17 @@ public class LagerService {
   @Transactional
   @WebMethod
   public Lagerauftrag auftragBearbeiten(Lagerauftrag lagerauftrag) {
-
+    
+    List<Lagerware> waren = lagerauftrag.getWarenliste();
+    
     if (lagerauftrag.getAuftragstyp() == Auftragstyp.Einlagerung) {
-
-      List<Lagerware> waren = lagerauftrag.getEinlagerungsWaren();
 
       for (int i = 0; i < waren.size(); i++) {
         Lagerware eingelagerteWare = wareEinlagern(waren.get(i));
         if (eingelagerteWare == null) {
           return null;
         }
-        eingelagerteWare.setEinlagerungsauftrag(lagerauftrag);
+        eingelagerteWare.getLagerauftraege().add(lagerauftrag);
         em.merge(eingelagerteWare);
         lagerauftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
         em.persist(lagerauftrag);
@@ -50,14 +50,14 @@ public class LagerService {
       em.merge(lagerauftrag);
 
     } else {
-      List<Lagerware> waren = lagerauftrag.getAuslagerungsWaren();
+      
       for (Lagerware ware : waren) {
         Lagerware ausgelagerteWare = wareAuslagern(ware);
         if (ausgelagerteWare == null) {
           return null;
         }
         
-        ausgelagerteWare.setAuslagerungsauftrag(lagerauftrag);
+        ausgelagerteWare.getLagerauftraege().add(lagerauftrag);
         lagerauftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
         em.persist(lagerauftrag);
         em.merge(ausgelagerteWare);
@@ -159,14 +159,16 @@ public class LagerService {
   }
 
   public List<Lagerware> sucheAlleEingelagertenWarenEinesKunden(int kundennr) {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.einlagerungsauftrag.auftraggeber.kundennummer like:kundennr AND c.auslagerungsauftrag is NULL ")
+    Query query = em.createQuery("SELECT c FROM Lagerware c JOIN c.lagerauftraege d WHERE d.auftraggeber.kundennummer like:kundennr AND c.lagerplatz IS NOT null")  
             .setParameter("kundennr", kundennr);
+    
+    
     return query.getResultList();
 
   }
   
   public List<Lagerware> sucheAlleEingelagertenWaren() {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.auslagerungsauftrag IS NULL");
+    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.lagerplatz IS NOT NULL");
     return query.getResultList();
 
   }

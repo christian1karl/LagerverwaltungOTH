@@ -7,13 +7,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Lagerauftrag implements Serializable{
@@ -22,11 +22,8 @@ public class Lagerauftrag implements Serializable{
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int lagerauftragsnummer;
 
-  @OneToMany(mappedBy = "einlagerungsauftrag", fetch = FetchType.EAGER)
-  private List<Lagerware> einlagerungsWaren;
-  
-  @OneToMany(mappedBy = "auslagerungsauftrag", fetch = FetchType.EAGER)
-  private List<Lagerware> auslagerungsWaren;
+  @ManyToMany
+  private List<Lagerware> warenliste;
 
   private Timestamp auftragsdatum;
 
@@ -45,20 +42,12 @@ public class Lagerauftrag implements Serializable{
     this.lagerauftragsnummer = lagerauftragsnummer;
   }
 
-  public List<Lagerware> getEinlagerungsWaren() {
-    return einlagerungsWaren;
+  public List<Lagerware> getWarenliste() {
+    return warenliste;
   }
 
-  public void setEinlagerungsWaren(List<Lagerware> EinlagerungsWare) {
-    this.einlagerungsWaren = EinlagerungsWare;
-  }
-
-  public List<Lagerware> getAuslagerungsWaren() {
-    return auslagerungsWaren;
-  }
-
-  public void setAuslagerungsWaren(List<Lagerware> AuslagerungsWare) {
-    this.auslagerungsWaren = AuslagerungsWare;
+  public void setWarenliste(List<Lagerware> warenliste) {
+    this.warenliste = warenliste;
   }
   
   public Timestamp getAuftragsdatum() {

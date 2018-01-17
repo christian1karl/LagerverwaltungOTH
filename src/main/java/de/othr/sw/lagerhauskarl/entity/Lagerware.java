@@ -2,12 +2,15 @@ package de.othr.sw.lagerhauskarl.entity;
 
 import de.othr.sw.lagerhauskarl.validation.ValidNotEmptyString;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -22,13 +25,8 @@ public class Lagerware implements Serializable {
   @ValidNotEmptyString
   private String warenbezeichnung;
 
-  @ManyToOne
-  @JoinColumn(name = "Einlagerungsauftrag")
-  private Lagerauftrag einlagerungsauftrag;
-
-  @ManyToOne
-  @JoinColumn(name = "Auslagerungsauftrag")
-  private Lagerauftrag auslagerungsauftrag;
+  @ManyToMany(mappedBy = "warenliste", fetch=FetchType.EAGER)
+  private List<Lagerauftrag> lagerauftraege;
 
   @ManyToOne
   @JoinColumn(name = "Lagerplatz")
@@ -59,22 +57,13 @@ public class Lagerware implements Serializable {
     this.lagerplatz = Lagerplatz;
   }
 
-  public Lagerauftrag getEinlagerungsauftrag() {
-    return einlagerungsauftrag;
+  public List<Lagerauftrag> getLagerauftraege() {
+    return lagerauftraege;
   }
 
-  public void setEinlagerungsauftrag(Lagerauftrag Einlagerungsauftrag) {
-    this.einlagerungsauftrag = Einlagerungsauftrag;
+  public void setLagerauftraege(List<Lagerauftrag> lagerauftraege) {
+    this.lagerauftraege = lagerauftraege;
   }
-
-  public Lagerauftrag getAuslagerungsauftrag() {
-    return auslagerungsauftrag;
-  }
-
-  public void setAuslagerungsauftrag(Lagerauftrag Auslagerungsauftrag) {
-    this.auslagerungsauftrag = Auslagerungsauftrag;
-  }
-  
 
   @Override
   public String toString() {
@@ -83,12 +72,11 @@ public class Lagerware implements Serializable {
 
   @Override
   public int hashCode() {
-    int hash = 5;
-    hash = 53 * hash + this.lagerwarennummer;
-    hash = 53 * hash + Objects.hashCode(this.warenbezeichnung);
-    hash = 53 * hash + Objects.hashCode(this.einlagerungsauftrag);
-    hash = 53 * hash + Objects.hashCode(this.auslagerungsauftrag);
-    hash = 53 * hash + Objects.hashCode(this.lagerplatz);
+    int hash = 3;
+    hash = 97 * hash + this.lagerwarennummer;
+    hash = 97 * hash + Objects.hashCode(this.warenbezeichnung);
+    hash = 97 * hash + Objects.hashCode(this.lagerauftraege);
+    hash = 97 * hash + Objects.hashCode(this.lagerplatz);
     return hash;
   }
 
@@ -110,14 +98,15 @@ public class Lagerware implements Serializable {
     if (!Objects.equals(this.warenbezeichnung, other.warenbezeichnung)) {
       return false;
     }
-    if (!Objects.equals(this.einlagerungsauftrag, other.einlagerungsauftrag)) {
+    if (!Objects.equals(this.lagerauftraege, other.lagerauftraege)) {
       return false;
     }
-    if (!Objects.equals(this.auslagerungsauftrag, other.auslagerungsauftrag)) {
+    if (!Objects.equals(this.lagerplatz, other.lagerplatz)) {
       return false;
     }
-    return Objects.equals(this.lagerplatz, other.lagerplatz);
+    return true;
   }
+
   
   
 

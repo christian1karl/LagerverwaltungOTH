@@ -1,5 +1,6 @@
 package de.othr.sw.lagerhauskarl.model;
 
+import de.othr.sw.lagerhauskarl.entity.Lagerauftrag;
 import de.othr.sw.lagerhauskarl.entity.Lagerware;
 import de.othr.sw.lagerhauskarl.service.LagerService;
 
@@ -82,16 +83,15 @@ public class WarenkorbModel implements Serializable {
   public void wareZumWarenkorbHinzufuegen() {
     this.Status = "";
     Lagerware ware = new Lagerware();
-    ware.setAuslagerungsauftrag(aktuelleWare.getAuslagerungsauftrag());
-    ware.setEinlagerungsauftrag(aktuelleWare.getEinlagerungsauftrag());
-    ware.setLagerplatz(aktuelleWare.getLagerplatz());
+    List<Lagerauftrag> neuerAuftrag = new ArrayList<>();
+    ware.setLagerauftraege(neuerAuftrag);
     ware.setWarenbezeichnung(aktuelleWare.getWarenbezeichnung());
 
     if (aktuellerWarenkorb.size() < lagerservice.anzahlFreierLagerwarenplaetze()) {
       aktuellerWarenkorb.add(ware);
       this.aktuelleWare.setWarenbezeichnung("");
       this.Gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
-      Status = "Ware zur Einlagerungsliste hinzugefügt!";
+      Status = "Ware zur Warenliste hinzugefügt!";
     } else {
       Status = "Keine weiteren Waren können der Liste hinzugefügt werden, da kein weiterer Lagerplatz verfügbar ist!";
     }
@@ -102,16 +102,7 @@ public class WarenkorbModel implements Serializable {
   }
   
    public void wareVonAuslagernWarenkorbEntfernen(Lagerware ware) {
-
-//    for (Lagerware warenkorbItem : this.aktuellerWarenkorb) {
-//      if (ware.getWarenbezeichnung().equals(warenkorbItem.getWarenbezeichnung())) {
-//        aktuellerWarenkorb.remove(warenkorbItem);
-//        break;
-//      }
-//    }
-
-    aktuellerWarenkorb.remove(ware);
-    
+    aktuellerWarenkorb.remove(ware);    
   }
 
   public String wareVonWarenkorbEntfernen(Lagerware ware) {
@@ -128,12 +119,7 @@ public class WarenkorbModel implements Serializable {
   }
 
   public boolean warenkorbEnthältElement(Lagerware ware) {
-    for (Lagerware warenkorbItem : this.aktuellerWarenkorb) {
-      if (ware.getWarenbezeichnung().equals(warenkorbItem.getWarenbezeichnung())) {
-        return true;
-      }
-    }
-    return false;
+    return aktuellerWarenkorb.contains(ware);
   }
 
   public void sucheAlleWarenDesAngemeldetenKunden() {
