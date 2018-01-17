@@ -98,28 +98,20 @@ public class WarenkorbModel implements Serializable {
   }
 
   public void wareZumAuslagernWarenkorbHinzufuegen(Lagerware aktuelleWare) {
-    this.Status = "";
-    Lagerware ware = new Lagerware();
-    ware.setAuslagerungsauftrag(aktuelleWare.getAuslagerungsauftrag());
-    ware.setEinlagerungsauftrag(aktuelleWare.getEinlagerungsauftrag());
-    ware.setLagerplatz(aktuelleWare.getLagerplatz());
-    ware.setWarenbezeichnung(aktuelleWare.getWarenbezeichnung());
-
-    aktuellerWarenkorb.add(ware);
-    this.aktuelleWare.setWarenbezeichnung("");
-    this.Gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
-    Status = "Ware zur Einlagerungsliste hinzugefügt!";
+      aktuellerWarenkorb.add(aktuelleWare);  
   }
   
    public void wareVonAuslagernWarenkorbEntfernen(Lagerware ware) {
 
-    for (Lagerware warenkorbItem : this.aktuellerWarenkorb) {
-      if (ware.getWarenbezeichnung().equals(warenkorbItem.getWarenbezeichnung())) {
-        aktuellerWarenkorb.remove(warenkorbItem);
-        break;
-      }
-    }
+//    for (Lagerware warenkorbItem : this.aktuellerWarenkorb) {
+//      if (ware.getWarenbezeichnung().equals(warenkorbItem.getWarenbezeichnung())) {
+//        aktuellerWarenkorb.remove(warenkorbItem);
+//        break;
+//      }
+//    }
 
+    aktuellerWarenkorb.remove(ware);
+    
   }
 
   public String wareVonWarenkorbEntfernen(Lagerware ware) {

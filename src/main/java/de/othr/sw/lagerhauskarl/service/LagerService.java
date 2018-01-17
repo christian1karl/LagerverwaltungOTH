@@ -91,48 +91,17 @@ public class LagerService {
 
   @Transactional
   public Lagerware wareAuslagern(Lagerware ware) {
-    Lagerware wareInDB = findeLagerware(ware);
-    Lagerplatz lagerplatz = findeLagerplatz(wareInDB.getLagerplatz());
-    lagerplatz.getLagerwaren().remove(wareInDB);
-    
-    wareInDB.setLagerplatz(null);
-
-    if (lagerplatz.getLagerwaren().size() < lagerplatz.getLagerwarenkapazitaet()) {
+    Lagerplatz lagerplatz = ware.getLagerplatz();
+    lagerplatz.getLagerwaren().remove(ware);
+    ware.setLagerplatz(null);
+    if(lagerplatz.getLagerwaren().size() < lagerplatz.getLagerwarenkapazitaet())
+    {
       lagerplatz.setLagerstatus(Lagerstatus.Frei);
     }
-    
-    
-    em.merge(lagerplatz);    
-    
-    return wareInDB;
-  }
-  
-  
-  public Lagerware findeLagerware(Lagerware ware) {
-    Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.warenbezeichnung like:ware")
-            .setParameter("ware", ware.getWarenbezeichnung());
-    List<Lagerware> Lagerwaren = query.getResultList();
-
-    if (Lagerwaren.isEmpty()) {
-      return null;
-    } else {
-      return Lagerwaren.get(0);
-    }
-
+    em.merge(lagerplatz);
+    return ware;
   }
 
-    public Lagerplatz findeLagerplatz(Lagerplatz lagerplatz) {
-    Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerplatznummer like:lagerplatz")
-            .setParameter("lagerplatz", lagerplatz.getLagerplatznummer() );
-    List<Lagerplatz> Lagerplaetze = query.getResultList();
-
-    if (Lagerplaetze.isEmpty()) {
-      return null;
-    } else {
-      return Lagerplaetze.get(0);
-    }
-
-  }
     
   public Lagerplatz findeFreienLagerplatz() {
     Query query = em.createQuery("SELECT c FROM Lagerplatz c WHERE c.lagerstatus like:lagerstatus")
