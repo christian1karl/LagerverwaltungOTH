@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+  <head>
+    <title>Lagerhaus</title>
+  </head>
+  <body>
+    <ui:composition template="./WEB-INF/templates/newTemplate.xhtml">
+      <ui:define name="content">
+        <h1>Meine Waren</h1>
+        <br/>
+        Bitte wählen Sie aus, welche Waren angezeigt werden sollen.
+        
+        <br/><br/>
+        <h:form id="selectForm">
+
+          <h:selectOneMenu value="#{warenkorbModel.selectedOption}">
+            <f:selectItem itemValue="0" itemLabel="-bitte auswählen-" />
+            <f:selectItem itemValue="1" itemLabel="Eingelagerte Waren" />
+            <f:selectItem itemValue="2" itemLabel="Ausgelagerte Waren" />
+            <f:selectItem itemValue="3" itemLabel="Alle Waren" />
+            <f:ajax render="selectedOptionForm"/>
+          </h:selectOneMenu>
+          
+        </h:form>
+        
+        <h:form id="selectedOptionForm">
+         
+          <h:dataTable id="EingelagerteWaren" var="ware" value="#{warenkorbModel.alleEingelagertenWarenDesAngemeldetenKunden()}" border="1" rendered="#{warenkorbModel.selectedOption == '1'}" >
+            <f:facet name="header">
+              <h:outputText value="Bestandsliste" />
+            </f:facet>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Warenbezeichnung" />
+              </f:facet>
+              <h:outputText value="#{ware.warenbezeichnung}" />
+            </h:column>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Eingelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.lagerauftraege[0].auftragsdatum}" />
+            </h:column>  
+
+          </h:dataTable>
+          
+          <h:dataTable id="AusgelagerteWaren" var="ware" value="#{warenkorbModel.alleAusgelagertenWarenDesAngemeldetenKunden()}" border="1" rendered="#{warenkorbModel.selectedOption == '2'}">
+            <f:facet name="header">
+              <h:outputText value="Bestandsliste" />
+            </f:facet>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Warenbezeichnung" />
+              </f:facet>
+              <h:outputText value="#{ware.warenbezeichnung}" />
+            </h:column>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Eingelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.lagerauftraege[0].auftragsdatum}" />
+            </h:column>  
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Ausgelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.lagerauftraege[1].auftragsdatum}" />
+            </h:column>
+          </h:dataTable>
+          
+          <h:dataTable id="AlleWaren" var="ware" value="#{warenkorbModel.alleWarenDesAngemeldetenKunden()}" border="1" rendered="#{warenkorbModel.selectedOption == '3'}">
+            <f:facet name="header">
+              <h:outputText value="Bestandsliste" />
+            </f:facet>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Warenbezeichnung" />
+              </f:facet>
+              <h:outputText value="#{ware.warenbezeichnung}" />
+            </h:column>
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Eingelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.lagerauftraege[0].auftragsdatum}" />
+            </h:column>  
+
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Ausgelagert am" />
+              </f:facet>
+              <h:outputText value="#{ware.lagerauftraege[1].auftragsdatum}" />
+            </h:column>
+          </h:dataTable>
+
+        </h:form>  
+      </ui:define>
+    </ui:composition>
+  </body>
+</html>

@@ -157,16 +157,25 @@ public class LagerService {
     return kosten;
   }
 
-  public List<Lagerware> sucheAlleEingelagertenWarenEinesKunden(int kundennr) {
+  public List<Lagerware> alleEingelagertenWarenEinesKunden(int kundennr) {
     Query query = em.createQuery("SELECT c FROM Lagerware c JOIN c.lagerauftraege d WHERE d.auftraggeber.kundennummer like:kundennr AND c.lagerplatz IS NOT null")  
             .setParameter("kundennr", kundennr);
-    
-    
     return query.getResultList();
-
   }
   
-  public List<Lagerware> sucheAlleEingelagertenWaren() {
+  public List<Lagerware> alleAusgelagertenWarenEinesKunden(int kundennr) {
+    Query query = em.createQuery("SELECT c FROM Lagerware c JOIN c.lagerauftraege d WHERE d.auftraggeber.kundennummer like:kundennr AND c.lagerplatz IS null")  
+            .setParameter("kundennr", kundennr);
+    return query.getResultList();
+  }
+  
+    public List<Lagerware> alleWarenEinesKunden(int kundennr) {
+    Query query = em.createQuery("SELECT c FROM Lagerware c JOIN c.lagerauftraege d WHERE d.auftraggeber.kundennummer like:kundennr")  
+            .setParameter("kundennr", kundennr);
+    return query.getResultList();
+  }
+  
+  public List<Lagerware> AlleEingelagertenWaren() {
     Query query = em.createQuery("SELECT c FROM Lagerware c WHERE c.lagerplatz IS NOT NULL");
     return query.getResultList();
 

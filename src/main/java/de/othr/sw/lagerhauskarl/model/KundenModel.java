@@ -80,7 +80,7 @@ public class KundenModel implements Serializable
       this.passwort = "";
       this.aktuellerKunde = null;
       loginFehler = false;
-      return "login_user";
+      return "logout_user";
   }
 
 

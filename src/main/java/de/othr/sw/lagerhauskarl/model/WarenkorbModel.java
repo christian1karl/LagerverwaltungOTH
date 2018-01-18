@@ -28,9 +28,11 @@ public class WarenkorbModel implements Serializable {
 
   private Lagerware aktuelleWare = new Lagerware();
 
-  private double Gesamtkosten;
+  private double gesamtkosten;
 
-  private String Status;
+  private String status;
+  
+  private String selectedOption;
 
   public List<Lagerware> getAlleWaren() {
     return alleWaren;
@@ -49,19 +51,19 @@ public class WarenkorbModel implements Serializable {
   }
 
   public double getGesamtkosten() {
-    return Gesamtkosten;
+    return gesamtkosten;
   }
 
   public void setGesamtkosten(double Gesamtkosten) {
-    this.Gesamtkosten = Gesamtkosten;
+    this.gesamtkosten = Gesamtkosten;
   }
 
   public String getStatus() {
-    return Status;
+    return status;
   }
 
   public void setStatus(String Status) {
-    this.Status = Status;
+    this.status = Status;
   }
 
   public LagerService getLagerservice() {
@@ -80,8 +82,18 @@ public class WarenkorbModel implements Serializable {
     this.kundenModel = kundenModel;
   }
 
+  public String getSelectedOption() {
+    return selectedOption;
+  }
+
+  public void setSelectedOption(String selectedOption) {
+    this.selectedOption = selectedOption;
+  }
+
+  
+  
   public void wareZumWarenkorbHinzufuegen() {
-    this.Status = "";
+    this.status = "";
     Lagerware ware = new Lagerware();
     List<Lagerauftrag> neuerAuftrag = new ArrayList<>();
     ware.setLagerauftraege(neuerAuftrag);
@@ -90,10 +102,10 @@ public class WarenkorbModel implements Serializable {
     if (aktuellerWarenkorb.size() < lagerservice.anzahlFreierLagerwarenplaetze()) {
       aktuellerWarenkorb.add(ware);
       this.aktuelleWare.setWarenbezeichnung("");
-      this.Gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
-      Status = "Ware zur Warenliste hinzugefügt!";
+      this.gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
+      status = "Ware zur Warenliste hinzugefügt!";
     } else {
-      Status = "Keine weiteren Waren können der Liste hinzugefügt werden, da kein weiterer Lagerplatz verfügbar ist!";
+      status = "Keine weiteren Waren können der Liste hinzugefügt werden, da kein weiterer Lagerplatz verfügbar ist!";
     }
   }
 
@@ -110,8 +122,8 @@ public class WarenkorbModel implements Serializable {
     for (Lagerware warenkorbItem : this.aktuellerWarenkorb) {
       if (ware.getWarenbezeichnung().equals(warenkorbItem.getWarenbezeichnung())) {
         aktuellerWarenkorb.remove(warenkorbItem);
-        this.Gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
-        Status = "Ware aus Einlagerungsliste gelöscht!";
+        this.gesamtkosten = lagerservice.kostenFreierLagerwarenplaetze(aktuellerWarenkorb.size());
+        status = "Ware aus Einlagerungsliste gelöscht!";
         return "ware_aus_warenkorb_gelöscht";
       }
     }
@@ -122,12 +134,24 @@ public class WarenkorbModel implements Serializable {
     return aktuellerWarenkorb.contains(ware);
   }
 
-  public void sucheAlleWarenDesAngemeldetenKunden() {
-    alleWaren = lagerservice.sucheAlleEingelagertenWarenEinesKunden(kundenModel.getAktuellerKunde().getKundennummer());
+  public List<Lagerware> alleEingelagertenWarenDesAngemeldetenKunden() {
+    alleWaren = lagerservice.alleEingelagertenWarenEinesKunden(kundenModel.getAktuellerKunde().getKundennummer());
+    return alleWaren;
+  }
+  
+  public List<Lagerware> alleAusgelagertenWarenDesAngemeldetenKunden() {
+    alleWaren = lagerservice.alleAusgelagertenWarenEinesKunden(kundenModel.getAktuellerKunde().getKundennummer());
+    return alleWaren;
+  }
+  
+  public List<Lagerware> alleWarenDesAngemeldetenKunden() {
+    alleWaren = lagerservice.alleWarenEinesKunden(kundenModel.getAktuellerKunde().getKundennummer());
+    return alleWaren;
   }
 
-  public void sucheAlleWaren() {
-    alleWaren = lagerservice.sucheAlleEingelagertenWaren();
+  public List<Lagerware> alleWaren() {
+    alleWaren = lagerservice.AlleEingelagertenWaren();
+    return alleWaren;
   }
 
 }

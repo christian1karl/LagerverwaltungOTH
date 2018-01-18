@@ -73,6 +73,7 @@ public class AuftragModel implements Serializable {
       return "auslagerungsliste_leer";
     }
     aktuellerAuftrag.setAuftraggeber(kundenModel.getAktuellerKunde());
+    aktuellerAuftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
     List<Lagerware> waren = bearbeiteterAuftrag.getWarenliste();
     for (Lagerware ware : waren) {
@@ -80,6 +81,7 @@ public class AuftragModel implements Serializable {
         return "auslagerung_nicht_erfolgreich";
       }
     }
+    
     this.warenkorbModel.getAlleWaren().clear();
     this.warenkorbModel.getAktuellerWarenkorb().clear();
     this.aktuellerAuftrag = new Lagerauftrag();

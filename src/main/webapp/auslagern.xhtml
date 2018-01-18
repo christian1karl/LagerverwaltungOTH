@@ -12,7 +12,7 @@
         <h:form id="auftragForm">
 
 
-          <h:commandButton value="Waren anzeigen" action="#{warenkorbModel.sucheAlleWarenDesAngemeldetenKunden()}">
+          <h:commandButton value="Waren anzeigen" action="#{warenkorbModel.alleEingelagertenWarenDesAngemeldetenKunden()}">
             <f:ajax execute="@form" render="@form" />
           </h:commandButton>
 

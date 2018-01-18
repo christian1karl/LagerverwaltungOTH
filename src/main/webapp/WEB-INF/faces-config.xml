@@ -53,8 +53,7 @@
       <from-outcome>fehler_beim_bezahlen</from-outcome>
       <to-view-id>/fehler_beim_bezahlen.xhtml</to-view-id>
     </navigation-case>
-    
-            
+                
     <navigation-case>
       <from-outcome>ware_aus_warenkorb_gelöscht</from-outcome>
       <to-view-id>/einlagern.xhtml</to-view-id>
@@ -64,6 +63,12 @@
       <from-outcome>auftrag_erfolgreich</from-outcome>
       <to-view-id>/einlagern_ok.xhtml</to-view-id>
     </navigation-case>
+    
+    <navigation-case>
+      <from-outcome>logout_user</from-outcome>
+      <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+    
         
         
   </navigation-rule>
