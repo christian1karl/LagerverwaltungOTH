@@ -6,8 +6,10 @@ import de.othr.sw.lagerhauskarl.entity.Lagerware;
 import de.othr.sw.lagerhauskarl.enums.Auftragstyp;
 import de.othr.sw.lagerhauskarl.enums.Lagerstatus;
 import de.othr.sw.lagerhauskarl.service.LagerService;
+import de.othr.sw.lagerhauskarl.service.TransaktionServiceLagerhaus;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -21,12 +23,16 @@ public class AuftragModel implements Serializable {
 
   @Inject
   private LagerService lagerservice;
-
+  
+  @Inject
+  private TransaktionServiceLagerhaus transaktionService; 
+  
   @Inject
   private KundenModel kundenModel;
 
   @Inject
   private WarenkorbModel warenkorbModel;
+    
 
   private Lagerauftrag aktuellerAuftrag = new Lagerauftrag();
 
@@ -82,6 +88,7 @@ public class AuftragModel implements Serializable {
   }
 
   public String einlagerungsAuftragBearbeiten() {
+    aktuellerAuftrag.setBezahlt(false);
     this.warenkorbModel.setStatus("");
     aktuellerAuftrag.setAuftragstyp(Auftragstyp.Einlagerung);
     lagerwarenZumAuftragHinzufuegen();
@@ -90,6 +97,15 @@ public class AuftragModel implements Serializable {
       return "einlagerungsliste_leer";
     }
     aktuellerAuftrag.setAuftraggeber(kundenModel.getAktuellerKunde());
+    aktuellerAuftrag.setGesamtkosten(warenkorbModel.getGesamtkosten());
+    aktuellerAuftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
+    
+    aktuellerAuftrag = transaktionService.einlagerungBezahlen(aktuellerAuftrag);
+
+    if(aktuellerAuftrag.isBezahlt() == false){
+      return"fehler_beim_bezahlen";
+    }
+    
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
 
     List<Lagerware> waren = bearbeiteterAuftrag.getWarenliste();
@@ -98,6 +114,8 @@ public class AuftragModel implements Serializable {
         return "einlagerung_nicht_erfolgreich";
       }
     }
+    
+        
     this.warenkorbModel.getAktuellerWarenkorb().clear();
     this.aktuellerAuftrag = new Lagerauftrag();
     this.warenkorbModel.setGesamtkosten(0);

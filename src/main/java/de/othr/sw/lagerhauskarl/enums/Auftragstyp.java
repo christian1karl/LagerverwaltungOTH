@@ -6,3 +6,4 @@ public enum Auftragstyp {
     Einlagerung, Auslagerung
     
 }
+

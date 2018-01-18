@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.brucknerbank.othr.de/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="TransaktionServiceService" targetNamespace="http://service.brucknerbank.othr.de/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.brucknerbank.othr.de/" elementFormDefault="unqualified" targetNamespace="http://service.brucknerbank.othr.de/" version="1.0">
+
+  <xs:element name="alleTransaktionen" type="tns:alleTransaktionen"/>
+
+  <xs:element name="alleTransaktionenResponse" type="tns:alleTransaktionenResponse"/>
+
+  <xs:element name="konto" type="tns:konto"/>
+
+  <xs:element name="kunde" type="tns:kunde"/>
+
+  <xs:element name="transaktion" type="tns:transaktion"/>
+
+  <xs:element name="transaktionAbschliessen" type="tns:transaktionAbschliessen"/>
+
+  <xs:element name="transaktionAbschliessenResponse" type="tns:transaktionAbschliessenResponse"/>
+
+  <xs:element name="transaktionBearbeiten" type="tns:transaktionBearbeiten"/>
+
+  <xs:element name="transaktionBearbeitenResponse" type="tns:transaktionBearbeitenResponse"/>
+
+  <xs:element name="transaktionLagerhausKarl" type="tns:transaktionLagerhausKarl"/>
+
+  <xs:element name="transaktionLagerhausKarlResponse" type="tns:transaktionLagerhausKarlResponse"/>
+
+  <xs:element name="transaktionLoeschen" type="tns:transaktionLoeschen"/>
+
+  <xs:element name="transaktionLoeschenResponse" type="tns:transaktionLoeschenResponse"/>
+
+  <xs:complexType name="transaktionAbschliessen">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktion">
+    <xs:complexContent>
+      <xs:extension base="tns:generatedIdEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="beschreibung" type="xs:string"/>
+          <xs:element name="betrag" type="xs:double"/>
+          <xs:element minOccurs="0" name="verwendungszweck" type="xs:string"/>
+          <xs:element minOccurs="0" name="datum" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="vonKonto" type="tns:konto"/>
+          <xs:element minOccurs="0" name="zuKonto" type="tns:konto"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="generatedIdEntity">
+    <xs:complexContent>
+      <xs:extension base="tns:singleIdEntity">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="singleIdEntity">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="konto">
+    <xs:complexContent>
+      <xs:extension base="tns:generatedIdEntity">
+        <xs:sequence>
+          <xs:element name="kontostand" type="xs:double"/>
+          <xs:element name="bankleitZahl" type="xs:long"/>
+          <xs:element minOccurs="0" name="bic" type="xs:string"/>
+          <xs:element minOccurs="0" name="eroeffnungsDatum" type="xs:dateTime"/>
+          <xs:element name="pin" type="xs:int"/>
+          <xs:element minOccurs="0" name="inhaber" type="tns:kunde"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="kunde">
+    <xs:complexContent>
+      <xs:extension base="tns:person">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="person">
+    <xs:complexContent>
+      <xs:extension base="tns:generatedIdEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="anschrift" type="tns:adresse"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="geburtsdatum" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="nutzerAccount" type="tns:nutzerAccount"/>
+          <xs:element minOccurs="0" name="telefonNummer" type="xs:string"/>
+          <xs:element minOccurs="0" name="vorname" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="adresse">
+    <xs:sequence>
+      <xs:element name="hausnummer" type="xs:int"/>
+      <xs:element minOccurs="0" name="land" type="xs:string"/>
+      <xs:element name="plz" type="xs:int"/>
+      <xs:element minOccurs="0" name="stadt" type="xs:string"/>
+      <xs:element minOccurs="0" name="strasse" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="nutzerAccount">
+    <xs:complexContent>
+      <xs:extension base="tns:stringIdEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element minOccurs="0" name="salt" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="stringIdEntity">
+    <xs:complexContent>
+      <xs:extension base="tns:singleIdEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionAbschliessenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionLoeschen">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionLoeschenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="alleTransaktionen">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="alleTransaktionenResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionBearbeiten">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionBearbeitenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionLagerhausKarl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:transaktion"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transaktionLagerhausKarlResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="alleTransaktionenResponse">
+    <wsdl:part element="tns:alleTransaktionenResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionBearbeiten">
+    <wsdl:part element="tns:transaktionBearbeiten" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionBearbeitenResponse">
+    <wsdl:part element="tns:transaktionBearbeitenResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionAbschliessenResponse">
+    <wsdl:part element="tns:transaktionAbschliessenResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionAbschliessen">
+    <wsdl:part element="tns:transaktionAbschliessen" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionLoeschen">
+    <wsdl:part element="tns:transaktionLoeschen" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="alleTransaktionen">
+    <wsdl:part element="tns:alleTransaktionen" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionLagerhausKarlResponse">
+    <wsdl:part element="tns:transaktionLagerhausKarlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionLagerhausKarl">
+    <wsdl:part element="tns:transaktionLagerhausKarl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transaktionLoeschenResponse">
+    <wsdl:part element="tns:transaktionLoeschenResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TransaktionService">
+    <wsdl:operation name="transaktionAbschliessen">
+      <wsdl:input message="tns:transaktionAbschliessen" name="transaktionAbschliessen">
+    </wsdl:input>
+      <wsdl:output message="tns:transaktionAbschliessenResponse" name="transaktionAbschliessenResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionLoeschen">
+      <wsdl:input message="tns:transaktionLoeschen" name="transaktionLoeschen">
+    </wsdl:input>
+      <wsdl:output message="tns:transaktionLoeschenResponse" name="transaktionLoeschenResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alleTransaktionen">
+      <wsdl:input message="tns:alleTransaktionen" name="alleTransaktionen">
+    </wsdl:input>
+      <wsdl:output message="tns:alleTransaktionenResponse" name="alleTransaktionenResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionBearbeiten">
+      <wsdl:input message="tns:transaktionBearbeiten" name="transaktionBearbeiten">
+    </wsdl:input>
+      <wsdl:output message="tns:transaktionBearbeitenResponse" name="transaktionBearbeitenResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionLagerhausKarl">
+      <wsdl:input message="tns:transaktionLagerhausKarl" name="transaktionLagerhausKarl">
+    </wsdl:input>
+      <wsdl:output message="tns:transaktionLagerhausKarlResponse" name="transaktionLagerhausKarlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TransaktionServiceServiceSoapBinding" type="tns:TransaktionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="transaktionAbschliessen">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="transaktionAbschliessen">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transaktionAbschliessenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionLoeschen">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="transaktionLoeschen">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transaktionLoeschenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alleTransaktionen">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="alleTransaktionen">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="alleTransaktionenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionBearbeiten">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="transaktionBearbeiten">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transaktionBearbeitenResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transaktionLagerhausKarl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="transaktionLagerhausKarl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transaktionLagerhausKarlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TransaktionServiceService">
+    <wsdl:port binding="tns:TransaktionServiceServiceSoapBinding" name="TransaktionServicePort">
+      <soap:address location="http://im-lamport:8080/BrucknerBank/TransaktionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

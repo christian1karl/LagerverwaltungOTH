@@ -48,6 +48,12 @@
       <from-outcome>einlagerung_nicht_erfolgreich</from-outcome>
       <to-view-id>/einlagern_fehler.xhtml</to-view-id>
     </navigation-case>
+    
+     <navigation-case>
+      <from-outcome>fehler_beim_bezahlen</from-outcome>
+      <to-view-id>/fehler_beim_bezahlen.xhtml</to-view-id>
+    </navigation-case>
+    
             
     <navigation-case>
       <from-outcome>ware_aus_warenkorb_gelöscht</from-outcome>

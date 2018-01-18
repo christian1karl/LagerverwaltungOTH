@@ -26,6 +26,10 @@ public class Lagerauftrag implements Serializable{
   private List<Lagerware> warenliste;
 
   private Timestamp auftragsdatum;
+  
+  private boolean bezahlt;
+  
+  private double Gesamtkosten;
 
   @Enumerated(EnumType.STRING)
   private Auftragstyp auftragstyp;
@@ -33,7 +37,7 @@ public class Lagerauftrag implements Serializable{
   @ManyToOne
   @JoinColumn(name="Auftraggeber")
   private Kunde auftraggeber;
-
+  
   public int getLagerauftragsnummer() {
     return lagerauftragsnummer;
   }
@@ -73,6 +77,25 @@ public class Lagerauftrag implements Serializable{
   public void setAuftraggeber(Kunde Auftraggeber) {
     this.auftraggeber = Auftraggeber;
   }
+
+  public boolean isBezahlt() {
+    return bezahlt;
+  }
+
+  public void setBezahlt(boolean bezahlt) {
+    this.bezahlt = bezahlt;
+  }
+
+  public double getGesamtkosten() {
+    return Gesamtkosten;
+  }
+
+  public void setGesamtkosten(double Gesamtkosten) {
+    this.Gesamtkosten = Gesamtkosten;
+  }
+  
+  
+  
   
   
     

@@ -44,7 +44,7 @@ public class LagerService {
         }
         eingelagerteWare.getLagerauftraege().add(lagerauftrag);
         em.merge(eingelagerteWare);
-        lagerauftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
+        
         em.persist(lagerauftrag);
       }
       em.merge(lagerauftrag);
@@ -58,7 +58,6 @@ public class LagerService {
         }
         
         ausgelagerteWare.getLagerauftraege().add(lagerauftrag);
-        lagerauftrag.setAuftragsdatum(new Timestamp(System.currentTimeMillis()));
         em.persist(lagerauftrag);
         em.merge(ausgelagerteWare);
       }
