@@ -64,21 +64,21 @@ public class AuftragModel implements Serializable {
     lagerwarenZumAuftragHinzufuegen();
     aktuellerAuftrag.setAuftragstyp(Auftragstyp.Auslagerung);
     if (aktuellerAuftrag.getWarenliste().isEmpty()) {
-      return "warenliste_leer";
+      return "auslagerungsliste_leer";
     }
     aktuellerAuftrag.setAuftraggeber(kundenModel.getAktuellerKunde());
     Lagerauftrag bearbeiteterAuftrag = lagerservice.auftragBearbeiten(aktuellerAuftrag);
     List<Lagerware> waren = bearbeiteterAuftrag.getWarenliste();
     for (Lagerware ware : waren) {
       if (ware.getLagerplatz() != null) {
-        return "ware_nicht_ausgelagert";
+        return "auslagerung_nicht_erfolgreich";
       }
     }
     this.warenkorbModel.getAlleWaren().clear();
     this.warenkorbModel.getAktuellerWarenkorb().clear();
     this.aktuellerAuftrag = new Lagerauftrag();
     this.warenkorbModel.setGesamtkosten(0);
-    return "auftrag_erfolgreich";
+    return "auslagerung_erfolgreich";
   }
 
   public String einlagerungsAuftragBearbeiten() {

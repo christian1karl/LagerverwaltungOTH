@@ -23,10 +23,30 @@
       <from-outcome>einlagerung_erfolgreich</from-outcome>
       <to-view-id>/einlagern_ok.xhtml</to-view-id>
     </navigation-case>
+    
+    <navigation-case>
+      <from-outcome>auslagerung_erfolgreich</from-outcome>
+      <to-view-id>/auslagern_ok.xhtml</to-view-id>
+    </navigation-case>
         
     <navigation-case>
       <from-outcome>einlagerungsliste_leer</from-outcome>
       <to-view-id>/einlagern.xhtml</to-view-id>
+    </navigation-case>
+    
+    <navigation-case>
+      <from-outcome>auslagerungsliste_leer</from-outcome>
+      <to-view-id>/auslagern.xhtml</to-view-id>
+    </navigation-case>
+    
+    <navigation-case>
+      <from-outcome>auslagerung_nicht_erfolgreich</from-outcome>
+      <to-view-id>/auslagern_fehler.xhtml</to-view-id>
+    </navigation-case>     
+       
+    <navigation-case>
+      <from-outcome>einlagerung_nicht_erfolgreich</from-outcome>
+      <to-view-id>/einlagern_fehler.xhtml</to-view-id>
     </navigation-case>
             
     <navigation-case>
