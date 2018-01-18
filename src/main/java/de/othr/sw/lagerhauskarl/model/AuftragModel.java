@@ -8,11 +8,8 @@ import de.othr.sw.lagerhauskarl.enums.Lagerstatus;
 import de.othr.sw.lagerhauskarl.service.LagerService;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 
 import javax.inject.Inject;
@@ -30,9 +27,6 @@ public class AuftragModel implements Serializable {
 
   @Inject
   private WarenkorbModel warenkorbModel;
-
-  @Inject
-  private transient Logger logger;
 
   private Lagerauftrag aktuellerAuftrag = new Lagerauftrag();
 
@@ -80,16 +74,11 @@ public class AuftragModel implements Serializable {
         return "ware_nicht_ausgelagert";
       }
     }
-    
-    for (Lagerware ware : waren) {
-      logger.log(Level.INFO, "Die Ware {0} wurde erfolgreich um {1} ausgelagert.", new Object[]{ware.getWarenbezeichnung(), new Timestamp(System.currentTimeMillis())});
-    }
-
     this.warenkorbModel.getAlleWaren().clear();
     this.warenkorbModel.getAktuellerWarenkorb().clear();
     this.aktuellerAuftrag = new Lagerauftrag();
     this.warenkorbModel.setGesamtkosten(0);
-    return "auslagerung_erfolgreich";
+    return "auftrag_erfolgreich";
   }
 
   public String einlagerungsAuftragBearbeiten() {
@@ -109,11 +98,6 @@ public class AuftragModel implements Serializable {
         return "einlagerung_nicht_erfolgreich";
       }
     }
-
-    for (Lagerware ware : waren) {
-      logger.log(Level.INFO, "Die Ware {0} wurde erfolgreich um {1} eingelagert.", new Object[]{ware.getWarenbezeichnung(), new Timestamp(System.currentTimeMillis())});
-    }
-
     this.warenkorbModel.getAktuellerWarenkorb().clear();
     this.aktuellerAuftrag = new Lagerauftrag();
     this.warenkorbModel.setGesamtkosten(0);
